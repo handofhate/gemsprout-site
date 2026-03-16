@@ -134,28 +134,32 @@
       color: var(--muted);
     }
 
-    /* SCREENSHOTS */
-    .screenshots {
+    /* SCREENSHOTS CAROUSEL */
+    .carousel-wrap {
+      padding: 40px 0 60px;
+      overflow: hidden;
+      position: relative;
+    }
+    .carousel-track {
       display: flex;
       gap: 20px;
-      justify-content: center;
-      padding: 40px 24px 60px;
-      overflow-x: auto;
+      width: max-content;
+      animation: scroll-left 30s linear infinite;
     }
-    .screenshot-placeholder {
-      width: 220px;
-      min-width: 220px;
-      height: 420px;
-      background: #fff;
-      border-radius: 28px;
+    .carousel-wrap:hover .carousel-track {
+      animation-play-state: paused;
+    }
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-track img {
+      width: 200px;
+      min-width: 200px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.15);
       border: 2px solid var(--border);
-      box-shadow: 0 8px 32px rgba(108,99,255,0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 600;
     }
 
     /* FEATURES */
@@ -390,7 +394,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-badge">Now on iOS</div>
+    <div class="hero-badge">Coming Soon on iOS</div>
     <h1>Chores that feel like a <span>game</span></h1>
     <p>Kids earn gems, level up, hit streaks, and unlock rewards they actually want. Finally, a chore app kids will ask to use.</p>
     <div class="hero-buttons">
@@ -400,11 +404,27 @@
     <p class="hero-sub">Free 14-day trial. No credit card required.</p>
   </section>
 
-  <!-- SCREENSHOTS -->
-  <div class="screenshots">
-    <div class="screenshot-placeholder">Screenshot 1</div>
-    <div class="screenshot-placeholder">Screenshot 2</div>
-    <div class="screenshot-placeholder">Screenshot 3</div>
+  <!-- SCREENSHOTS CAROUSEL -->
+  <div class="carousel-wrap">
+    <div class="carousel-track">
+      <img src="screenshots/1.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/2.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/3.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/4.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/5.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/6.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/7.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/8.PNG" alt="GemSprout screenshot">
+      <!-- Duplicated for seamless loop -->
+      <img src="screenshots/1.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/2.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/3.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/4.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/5.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/6.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/7.PNG" alt="GemSprout screenshot">
+      <img src="screenshots/8.PNG" alt="GemSprout screenshot">
+    </div>
   </div>
 
   <!-- FEATURES -->
