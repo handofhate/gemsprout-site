@@ -6,6 +6,7 @@
   <title>GemSprout — Chores & Rewards for Families</title>
   <meta name="description" content="Make chores feel like a game. Kids earn gems, level up, hit streaks, and unlock rewards they actually want.">
   <link rel="icon" type="image/png" href="gemsproutpadded.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
       --purple: #6C63FF;
@@ -171,6 +172,60 @@
       transform: scale(1.08);
       box-shadow: 0 16px 48px rgba(108,99,255,0.25);
     }
+
+    /* COMING SOON MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9998;
+      background: rgba(0,0,0,0.6);
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 36px;
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--text); }
+    .modal-icon { font-size: 3rem; margin-bottom: 16px; }
+    .modal h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; }
+    .modal p { color: var(--muted); margin-bottom: 24px; font-size: 0.95rem; }
+    .modal-notify {
+      display: inline-block;
+      background: var(--purple);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .modal-notify:hover { opacity: 0.85; }
+    .modal-sub { margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+
+    /* SOCIAL ICONS */
+    .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
+    .social-links a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: color 0.2s; }
+    .social-links a:hover { color: #fff; }
 
     /* LIGHTBOX */
     .lightbox {
@@ -429,7 +484,7 @@
       <img src="gemsproutpadded.png" alt="GemSprout">
       GemSprout
     </a>
-    <a href="#download" class="nav-cta">Download</a>
+    <a href="#" class="nav-cta" onclick="openModal();return false;">Download</a>
   </nav>
 
   <!-- HERO -->
@@ -438,8 +493,8 @@
     <h1>Chores that feel like a <span>game</span></h1>
     <p>Kids earn gems, level up, hit streaks, and unlock rewards they actually want. Finally, a chore app kids will ask to use.</p>
     <div class="hero-buttons">
-      <a href="#download" class="btn-primary" id="download">Download on the App Store</a>
-      <a href="app.gemsprout.com" class="btn-secondary">Try the Web App</a>
+      <a href="#" class="btn-primary" onclick="openModal();return false;">Download on the App Store</a>
+      <a href="#" class="btn-secondary" onclick="openModal();return false;">Try the Web App</a>
     </div>
     <p class="hero-sub">Free 14-day trial. No credit card required.</p>
   </section>
@@ -564,8 +619,20 @@
   <section class="cta">
     <h2>Ready to make chores fun?</h2>
     <p>Join families who've turned the daily chore battle into something kids actually look forward to.</p>
-    <a href="#download" class="btn-white">Download GemSprout Free</a>
+    <a href="#" class="btn-white" onclick="openModal();return false;">Download GemSprout Free</a>
   </section>
+
+  <!-- COMING SOON MODAL -->
+  <div class="modal-overlay" id="coming-soon-modal">
+    <div class="modal">
+      <span class="modal-close" onclick="closeModal()">&times;</span>
+      <div class="modal-icon">🌱</div>
+      <h2>Coming Soon!</h2>
+      <p>GemSprout is launching on the App Store soon. Sign up to be notified the moment it's live.</p>
+      <a href="http://eepurl.com/jBQXyo" target="_blank" class="modal-notify">Notify Me at Launch</a>
+      <p class="modal-sub">No spam. Just one email when we launch.</p>
+    </div>
+  </div>
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
@@ -575,6 +642,11 @@
 
   <!-- FOOTER -->
   <footer>
+    <div class="social-links">
+      <a href="https://instagram.com/gemsproutapp" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://x.com/gemsprout" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://tiktok.com/@gemsproutapp" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
     <div class="footer-links">
       <a href="/privacy.html">Privacy Policy</a>
       <a href="mailto:gemsproutapp@gmail.com">Support</a>
@@ -583,6 +655,11 @@
   </footer>
 
   <script>
+    function openModal() { document.getElementById('coming-soon-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('coming-soon-modal').classList.remove('open'); }
+    document.getElementById('coming-soon-modal').addEventListener('click', e => { if (e.target === document.getElementById('coming-soon-modal')) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
