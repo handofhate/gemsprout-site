@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GemSprout — Chores & Rewards for Families</title>
+  <meta name="description" content="Make chores feel like a game. Kids earn gems, level up, hit streaks, and unlock rewards they actually want.">
+  <link rel="icon" type="image/png" href="gemsproutpadded.png">
+  <style>
+    :root {
+      --purple: #6C63FF;
+      --teal:   #43D9AD;
+      --yellow: #FFD93D;
+      --green:  #6BCB77;
+      --bg:     #F0F4FF;
+      --text:   #2D3047;
+      --muted:  #6B7280;
+      --card:   #FFFFFF;
+      --border: #E5E7EB;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--purple);
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .nav-cta {
+      background: var(--purple);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #EEF2FF;
+      color: var(--purple);
+      font-weight: 700;
+      font-size: 0.8rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .hero h1 span { color: var(--purple); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 540px;
+      margin: 0 auto 36px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      background: #fff;
+      color: var(--purple);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 2px solid var(--purple);
+      transition: background 0.2s;
+    }
+    .btn-secondary:hover { background: #EEF2FF; }
+    .hero-sub {
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* SCREENSHOTS */
+    .screenshots {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      padding: 40px 24px 60px;
+      overflow-x: auto;
+    }
+    .screenshot-placeholder {
+      width: 220px;
+      min-width: 220px;
+      height: 420px;
+      background: #fff;
+      border-radius: 28px;
+      border: 2px solid var(--border);
+      box-shadow: 0 8px 32px rgba(108,99,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    /* FEATURES */
+    .features {
+      background: #fff;
+      padding: 72px 24px;
+    }
+    .section-label {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0 auto 52px;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: var(--bg);
+      border-radius: 20px;
+      padding: 28px 24px;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .feature-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      padding: 72px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 44px;
+      min-width: 44px;
+      height: 44px;
+      background: var(--purple);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+    .step-content h3 {
+      font-weight: 800;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .step-content p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* PRICING */
+    .pricing {
+      background: #fff;
+      padding: 72px 24px;
+    }
+    .pricing-cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 700px;
+      margin: 48px auto 0;
+    }
+    .pricing-card {
+      background: var(--bg);
+      border-radius: 24px;
+      padding: 32px 28px;
+      flex: 1;
+      min-width: 240px;
+      max-width: 300px;
+      position: relative;
+    }
+    .pricing-card.featured {
+      background: var(--purple);
+      color: #fff;
+    }
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--yellow);
+      color: var(--text);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .pricing-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      opacity: 0.7;
+      margin-bottom: 8px;
+    }
+    .pricing-price {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .pricing-price span {
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0.7;
+    }
+    .pricing-desc {
+      font-size: 0.85rem;
+      opacity: 0.7;
+      margin-bottom: 20px;
+    }
+    .pricing-trial {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .pricing-card.featured .pricing-trial { color: var(--yellow); }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      padding: 80px 24px;
+      background: linear-gradient(135deg, var(--purple) 0%, #9B59B6 100%);
+      color: #fff;
+    }
+    .cta h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .cta p {
+      font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 36px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn-white {
+      background: #fff;
+      color: var(--purple);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+
+    /* FOOTER */
+    footer {
+      background: var(--text);
+      color: #fff;
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    footer a {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    footer a:hover { color: #fff; }
+    .footer-links { margin-bottom: 12px; }
+    .footer-copy { color: rgba(255,255,255,0.4); }
+
+    @media (max-width: 600px) {
+      nav { padding: 12px 16px; }
+      .hero { padding: 56px 20px 40px; }
+      .step { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="gemsproutpadded.png" alt="GemSprout">
+      GemSprout
+    </a>
+    <a href="#download" class="nav-cta">Download</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Now on iOS</div>
+    <h1>Chores that feel like a <span>game</span></h1>
+    <p>Kids earn gems, level up, hit streaks, and unlock rewards they actually want. Finally, a chore app kids will ask to use.</p>
+    <div class="hero-buttons">
+      <a href="#download" class="btn-primary" id="download">Download on the App Store</a>
+      <a href="app.gemsprout.com" class="btn-secondary">Try the Web App</a>
+    </div>
+    <p class="hero-sub">Free 14-day trial. No credit card required.</p>
+  </section>
+
+  <!-- SCREENSHOTS -->
+  <div class="screenshots">
+    <div class="screenshot-placeholder">Screenshot 1</div>
+    <div class="screenshot-placeholder">Screenshot 2</div>
+    <div class="screenshot-placeholder">Screenshot 3</div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <p class="section-label">Why GemSprout</p>
+    <h2 class="section-title">Built to actually work</h2>
+    <p class="section-sub">We made chores feel like a game — and that changes everything.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">💎</div>
+        <h3>Earn Gems</h3>
+        <p>Kids earn gems for every completed chore. Set custom values so bigger jobs pay more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Streaks & Combos</h3>
+        <p>Keep the momentum going with streak bonuses and combo rewards for back-to-back chores.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Levels & Badges</h3>
+        <p>Kids level up as they grow, unlocking badges that show off their hard work.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎁</div>
+        <h3>Real Rewards</h3>
+        <p>Create a custom prize list. Kids save up and cash in gems for rewards that matter to them.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📸</div>
+        <h3>Photo Verification</h3>
+        <p>Kids snap before and after photos so parents can see the proof before approving.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <h3>Savings Goals</h3>
+        <p>Teach real money skills with savings goals, parent matching, and interest on saved gems.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how">
+    <p class="section-label">Getting Started</p>
+    <h2 class="section-title">Up and running in minutes</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Set up your family</h3>
+          <p>Add your kids, pick their avatars, and create a chore list that fits your routine.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Share your family code</h3>
+          <p>One code connects everyone. Share it with your partner and every device stays in sync automatically.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Watch them get to work</h3>
+          <p>Kids check off chores, earn gems, and race toward rewards. No more reminders needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <p class="section-label">Pricing</p>
+    <h2 class="section-title">Simple, fair pricing</h2>
+    <p class="section-sub">Try free for 14 days. Cancel anytime.</p>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <div class="pricing-label">Monthly</div>
+        <div class="pricing-price">$2.99<span>/mo</span></div>
+        <div class="pricing-desc">Billed monthly</div>
+        <div class="pricing-trial">14-day free trial</div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Best Value</div>
+        <div class="pricing-label">Annual</div>
+        <div class="pricing-price">$24.99<span>/yr</span></div>
+        <div class="pricing-desc">Save 30% vs monthly</div>
+        <div class="pricing-trial">14-day free trial</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2>Ready to make chores fun?</h2>
+    <p>Join families who've turned the daily chore battle into something kids actually look forward to.</p>
+    <a href="#download" class="btn-white">Download GemSprout Free</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="mailto:gemsproutapp@gmail.com">Support</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 GemSprout. All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
