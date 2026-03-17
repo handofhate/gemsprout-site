@@ -222,6 +222,62 @@
     .modal-notify:hover { opacity: 0.85; }
     .modal-sub { margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
 
+    /* MAILERLITE EMBED (THEMED) */
+    #mlb2-38567556.ml-form-embedContainer {
+      width: 100%;
+      margin: 0;
+    }
+    #mlb2-38567556 .ml-form-embedWrapper {
+      background: transparent;
+      width: 100%;
+    }
+    #mlb2-38567556 .ml-form-embedBody {
+      padding: 0;
+    }
+    #mlb2-38567556 .ml-form-formContent {
+      margin-bottom: 12px;
+    }
+    #mlb2-38567556 .ml-field-group input[type="email"] {
+      width: 100%;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #mlb2-38567556 .ml-field-group input[type="email"]:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 4px rgba(108,99,255,0.12);
+    }
+    #mlb2-38567556 .ml-form-embedSubmit {
+      width: 100%;
+    }
+    #mlb2-38567556 .ml-form-embedSubmit button.primary {
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 0;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    #mlb2-38567556 .ml-form-embedSubmit button.primary:hover {
+      opacity: 0.85;
+    }
+    #mlb2-38567556 .ml-form-successContent h4 {
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+    #mlb2-38567556 .ml-form-successContent p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
     /* SOCIAL ICONS */
     .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
     .social-links a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: color 0.2s; }
@@ -629,7 +685,34 @@
       <div class="modal-icon">🌱</div>
       <h2>Coming Soon!</h2>
       <p>GemSprout is launching on the App Store soon. Sign up to be notified the moment it's live.</p>
-      <a href="http://eepurl.com/jBQXyo" target="_blank" class="modal-notify">Notify Me at Launch</a>
+      <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Enter your email" autocomplete="email">
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Notify Me at Launch</button>
+                </div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+            <div class="ml-form-successBody row-success" style="display: none">
+              <div class="ml-form-successContent">
+                <h4>You're on the list!</h4>
+                <p>Thanks — we'll email you as soon as GemSprout launches.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <p class="modal-sub">No spam. Just one email when we launch.</p>
     </div>
   </div>
@@ -673,6 +756,19 @@
     document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
     lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+  </script>
+
+  <script>
+    function ml_webform_success_38567556() {
+      var $ = window.ml_jQuery || window.jQuery;
+      if (!$) return;
+      $('.ml-subscribe-form-38567556 .row-success').show();
+      $('.ml-subscribe-form-38567556 .row-form').hide();
+    }
+  </script>
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+  <script>
+    fetch('https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/takel');
   </script>
 </body>
 </html>
