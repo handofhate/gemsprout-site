@@ -284,6 +284,53 @@
       font-size: 0.9rem;
     }
 
+    /* BETA CHECKBOX */
+    .beta-checkbox-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 12px 0 16px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .beta-checkbox-wrap input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+      margin-top: 1px;
+    }
+    .beta-checkbox-wrap input[type="checkbox"]:checked {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+    .beta-checkbox-wrap input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .beta-checkbox-label {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .beta-checkbox-label strong {
+      color: var(--purple);
+    }
+
     /* SOCIAL ICONS */
     .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
     .social-links a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: color 0.2s; }
@@ -704,6 +751,14 @@
                     </div>
                   </div>
                 </div>
+                <label class="beta-checkbox-wrap">
+                  <input type="checkbox" id="beta-opt-in">
+                  <span class="beta-checkbox-label">
+                    <strong>Yes, I want to beta test GemSprout!</strong><br>
+                    I'd like early access via TestFlight before the public launch.
+                  </span>
+                </label>
+                <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field" value="No">
                 <input type="hidden" name="ml-submit" value="1">
                 <div class="ml-form-embedSubmit">
                   <button type="submit" class="primary">Notify Me at Launch</button>
@@ -713,8 +768,8 @@
             </div>
             <div class="ml-form-successBody row-success" style="display: none">
               <div class="ml-form-successContent">
-                <h4>You're on the list!</h4>
-                <p>Thanks — we'll email you as soon as GemSprout launches.</p>
+                <h4 id="success-heading">You're on the list!</h4>
+                <p id="success-msg">Thanks — we'll email you as soon as GemSprout launches.</p>
               </div>
             </div>
           </div>
@@ -766,9 +821,17 @@
   </script>
 
   <script>
+    document.getElementById('beta-opt-in').addEventListener('change', function() {
+      document.getElementById('beta-hidden-field').value = this.checked ? 'Yes' : 'No';
+    });
+
     function ml_webform_success_38567556() {
       var $ = window.ml_jQuery || window.jQuery;
       if (!$) return;
+      if (document.getElementById('beta-opt-in').checked) {
+        document.getElementById('success-heading').textContent = "You're in!";
+        document.getElementById('success-msg').textContent = "Thanks! We'll reach out with your TestFlight invite before launch.";
+      }
       $('.ml-subscribe-form-38567556 .row-success').show();
       $('.ml-subscribe-form-38567556 .row-form').hide();
     }
