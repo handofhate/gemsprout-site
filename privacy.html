@@ -61,7 +61,7 @@
 </header>
 
 <main>
-  <p class="updated">Last updated: March 15, 2026</p>
+  <p class="updated">Last updated: March 29, 2026</p>
 
   <p>GemSprout ("we", "our", or "us") is a family chore and rewards app. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information. By using GemSprout, you agree to this policy.</p>
 
@@ -71,7 +71,7 @@
     <li><strong>Family data</strong> — family name, member names, ages, avatars, chore lists, reward prizes, and completion history. This data is entered by you and stored in your family's private cloud document.</li>
     <li><strong>Chore photos</strong> — if you use the before/after photo feature, photos are uploaded to secure cloud storage and associated with your family's data.</li>
     <li><strong>App settings</strong> — preferences such as timezone, notification settings, and feature toggles.</li>
-    <li><strong>Anonymous authentication token</strong> — we use Firebase Anonymous Authentication to securely identify your family's data without linking it to any personal identity.</li>
+    <li><strong>Authentication tokens</strong> — parents who sign in with Google or Apple Sign-In are identified by a Firebase authentication token linked to their Google or Apple account. Kid devices use Firebase Anonymous Authentication, which generates a random identifier not linked to any personal identity.</li>
   </ul>
 
   <h2>How We Use Your Information</h2>
@@ -83,14 +83,29 @@
   </ul>
   <p>We do not use your data for advertising, analytics profiling, or any purpose beyond operating the app.</p>
 
-  <h2>Children's Privacy</h2>
-  <p>GemSprout is designed for use by families, including children under 13. We take children's privacy seriously and comply with the Children's Online Privacy Protection Act (COPPA).</p>
+  <h2>Children's Privacy and COPPA Compliance</h2>
+  <p>GemSprout is designed for use by families, including children under 13. We take children's privacy seriously and comply with the Children's Online Privacy Protection Act (COPPA) and applicable state and federal children's privacy laws.</p>
+
+  <p><strong>No direct data collection from children.</strong> GemSprout does not collect personal information directly from children. Children do not create accounts, enter their own information, or communicate with us in any way through the App. All information about children — including names, ages, and avatars — is entered by a parent or guardian and remains under the parent's or guardian's control at all times.</p>
+
+  <p><strong>Parental consent and control.</strong> By creating a GemSprout family account, the parent or guardian provides consent for the App to store their family's information, including their children's names, ages, avatars, and chore history. Parents and guardians may review, update, or permanently delete all family data at any time from within the App (Settings → Reset All Data). To request deletion of your family's data or to ask questions about your child's information, contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
+
+  <p><strong>What information is stored about children.</strong> The App stores the following information about children, as entered by a parent or guardian:</p>
   <ul>
-    <li>We do not collect any personally identifiable information from children.</li>
-    <li>Children's profiles (names, avatars, chore data) are created and managed by parents or guardians within the app.</li>
-    <li>No child data is shared with third parties for marketing or advertising purposes.</li>
-    <li>Parents may delete all family data at any time from within the app (Settings → Reset All Data).</li>
+    <li>First name or nickname</li>
+    <li>Age (used to tailor in-app experience)</li>
+    <li>Avatar selection (a pre-set emoji or image chosen from within the app)</li>
+    <li>Chore completion history, earned rewards, and streak/badge progress</li>
+    <li>Chore photos, if the before/after photo feature is used (stored temporarily and deleted upon chore approval)</li>
   </ul>
+
+  <p><strong>No advertising or marketing to children.</strong> We do not use children's information for advertising or marketing purposes. No child data is shared with, sold to, or used by third parties for commercial purposes.</p>
+
+  <p><strong>Third-party services.</strong> Children's data is stored using Google Firebase (as described in the Data Storage section below). Firebase's handling of children's data is governed by <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>. We do not use any advertising networks, analytics tools, or other third-party services that would have access to children's data.</p>
+
+  <p><strong>Kid devices.</strong> When a child uses GemSprout on a shared or dedicated device, the device connects to the family's data using a private family code. Kid devices use Firebase Anonymous Authentication — a randomly generated identifier that is not linked to any name, email address, or personal identity.</p>
+
+  <p><strong>Contact for COPPA inquiries.</strong> Parents and guardians may contact us at any time to review the information we have stored about their children, request corrections, or request permanent deletion. Contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
 
   <h2>Data Storage and Security</h2>
   <p>Your family's data is stored using Google Firebase (Firestore and Firebase Storage), a secure cloud platform. Data is protected by Firebase security rules that restrict access to your family's unique code. Chore photos are stored in Firebase Storage under your family's private path.</p>
@@ -114,6 +129,7 @@
   <h2>Contact Us</h2>
   <p>If you have any questions about this Privacy Policy or your data, please contact us at:</p>
   <p><a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a></p>
+  <p style="margin-top:24px;font-size:0.9rem;color:var(--muted)">See also: <a href="terms.html">Terms of Service</a></p>
 </main>
 
 </body>
