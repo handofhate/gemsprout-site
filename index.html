@@ -754,11 +754,21 @@
                 <label class="beta-checkbox-wrap">
                   <input type="checkbox" id="beta-opt-in">
                   <span class="beta-checkbox-label">
-                    <strong>Yes, I want to beta test GemSprout!</strong><br>
-                    I'd like early access via TestFlight before the public launch.
+                    <strong>Interested in future beta testing?</strong><br>
+                    Sign me up to be considered for future test builds.
                   </span>
                 </label>
+                <div id="platform-selector" style="display:none;margin:-4px 0 16px;padding:12px 14px;background:#EEF2FF;border-radius:12px;">
+                  <p style="font-size:0.82rem;font-weight:700;color:var(--purple);margin-bottom:8px;">Which platform?</p>
+                  <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;margin-bottom:6px">
+                    <input type="radio" name="beta_platform" value="iOS" checked> iOS (iPhone / iPad)
+                  </label>
+                  <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
+                    <input type="radio" name="beta_platform" value="Android"> Android
+                  </label>
+                </div>
                 <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field" value="No">
+                <input type="hidden" name="fields[platform]" id="platform-hidden-field" value="">
                 <input type="hidden" name="ml-submit" value="1">
                 <div class="ml-form-embedSubmit">
                   <button type="submit" class="primary">Notify Me at Launch</button>
@@ -794,6 +804,7 @@
     </div>
     <div class="footer-links">
       <a href="/privacy.html">Privacy Policy</a>
+      <a href="/terms.html">Terms of Service</a>
       <a href="/support.html">Support</a>
     </div>
     <div class="footer-copy">&copy; 2026 GemSprout. All rights reserved.</div>
@@ -823,14 +834,24 @@
   <script>
     document.getElementById('beta-opt-in').addEventListener('change', function() {
       document.getElementById('beta-hidden-field').value = this.checked ? 'Yes' : 'No';
+      document.getElementById('platform-selector').style.display = this.checked ? 'block' : 'none';
+      document.getElementById('platform-hidden-field').value = this.checked
+        ? (document.querySelector('input[name="beta_platform"]:checked')?.value || 'iOS')
+        : '';
+    });
+
+    document.querySelectorAll('input[name="beta_platform"]').forEach(r => {
+      r.addEventListener('change', function() {
+        document.getElementById('platform-hidden-field').value = this.value;
+      });
     });
 
     function ml_webform_success_38567556() {
       var $ = window.ml_jQuery || window.jQuery;
       if (!$) return;
       if (document.getElementById('beta-opt-in').checked) {
-        document.getElementById('success-heading').textContent = "You're in!";
-        document.getElementById('success-msg').textContent = "Thanks! We'll reach out with your TestFlight invite before launch.";
+        document.getElementById('success-heading').textContent = "You're on the list!";
+        document.getElementById('success-msg').textContent = "Thanks — we'll reach out when a future beta opens up.";
       }
       $('.ml-subscribe-form-38567556 .row-success').show();
       $('.ml-subscribe-form-38567556 .row-form').hide();

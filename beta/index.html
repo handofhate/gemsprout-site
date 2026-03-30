@@ -4,22 +4,283 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GemSprout Beta</title>
-  <meta http-equiv="refresh" content="0;url=https://testflight.apple.com/join/tfv4U27w">
+  <link rel="icon" type="image/png" href="https://gemsprout.com/gemsproutpadded.png">
   <style>
-    body { margin: 0; font-family: -apple-system, sans-serif; background: linear-gradient(145deg, #667eea, #764ba2); min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px; box-sizing: border-box; }
-    .card { background: #fff; border-radius: 20px; padding: 36px 28px; max-width: 320px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
-    img { width: 80px; height: 80px; margin-bottom: 12px; }
-    h1 { font-size: 1.4rem; font-weight: 800; color: #2D3047; margin: 0 0 8px; }
-    p { font-size: 0.9rem; color: #6B7280; line-height: 1.5; margin: 0 0 20px; }
-    a { display: inline-block; background: linear-gradient(135deg, #6C63FF, #8B5CF6); color: #fff; font-weight: 700; font-size: 1rem; padding: 14px 32px; border-radius: 12px; text-decoration: none; }
+    :root {
+      --purple: #6C63FF;
+      --border: #E5E7EB;
+      --text:   #2D3047;
+      --muted:  #6B7280;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(145deg, #667eea, #764ba2);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 40px 32px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    .card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 18px;
+      margin-bottom: 16px;
+    }
+    .card h1 {
+      font-size: 1.5rem;
+      font-weight: 900;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .card .status {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .card p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 24px;
+    }
+    .form-label {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      display: block;
+      text-align: left;
+    }
+    /* MailerLite overrides */
+    #mlb2-38567556.ml-form-embedContainer { width: 100%; margin: 0; }
+    #mlb2-38567556 .ml-form-embedWrapper { background: transparent; width: 100%; }
+    #mlb2-38567556 .ml-form-embedBody { padding: 0; }
+    #mlb2-38567556 .ml-form-formContent { margin-bottom: 12px; }
+    #mlb2-38567556 .ml-field-group input[type="email"] {
+      width: 100%;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #mlb2-38567556 .ml-field-group input[type="email"]:focus {
+      border-color: var(--purple);
+      box-shadow: 0 0 0 4px rgba(108,99,255,0.12);
+    }
+    #mlb2-38567556 .ml-form-embedSubmit { width: 100%; }
+    #mlb2-38567556 .ml-form-embedSubmit button.primary {
+      width: 100%;
+      background: var(--purple);
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: 0;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    #mlb2-38567556 .ml-form-embedSubmit button.primary:hover { opacity: 0.85; }
+    #mlb2-38567556 .ml-form-successContent h4 { font-size: 1.1rem; margin-bottom: 6px; color: var(--text); }
+    #mlb2-38567556 .ml-form-successContent p { color: var(--muted); font-size: 0.9rem; }
+    .beta-checkbox-wrap {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 12px 0 16px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .beta-checkbox-wrap input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 20px;
+      min-width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      transition: border-color 0.2s, background 0.2s;
+      margin-top: 1px;
+    }
+    .beta-checkbox-wrap input[type="checkbox"]:checked {
+      background: var(--purple);
+      border-color: var(--purple);
+    }
+    .beta-checkbox-wrap input[type="checkbox"]:checked::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 6px;
+      height: 10px;
+      border: 2px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg);
+    }
+    .beta-checkbox-label {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.45;
+    }
+    .beta-checkbox-label strong { color: var(--purple); }
+    .platform-selector {
+      display: none;
+      margin: -4px 0 16px;
+      padding: 12px 14px;
+      background: #EEF2FF;
+      border-radius: 12px;
+      text-align: left;
+    }
+    .platform-selector p {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+    .platform-selector label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .modal-sub { margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
+    .app-store-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 0.88rem;
+      color: var(--purple);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .app-store-link:hover { text-decoration: underline; }
+    .back-link {
+      display: block;
+      text-align: left;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 14px;
+      max-width: 420px;
+      width: 100%;
+    }
+    .back-link:hover { color: #fff; }
   </style>
 </head>
 <body>
+  <a href="/" class="back-link">← Return to GemSprout</a>
   <div class="card">
     <img src="https://gemsprout.com/gemsproutpadded.png" alt="GemSprout">
     <h1>GemSprout Beta</h1>
-    <p>Redirecting you to TestFlight... if it doesn't open automatically, tap below.</p>
-    <a href="https://testflight.apple.com/join/tfv4U27w">Open in TestFlight →</a>
+    <span class="status">Beta Testing Closed</span>
+    <p>Beta testing is not currently open. GemSprout is available on the App Store — or sign up below to be considered for future test builds.</p>
+    <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="app-store-link">Download on the App Store →</a>
+    <div class="divider" style="margin-top:24px;"></div>
+    <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
+      <div class="ml-form-align-center">
+        <div class="ml-form-embedWrapper embedForm">
+          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/subscribe" data-code="" method="post" target="_blank">
+              <div class="ml-form-formContent">
+                <div class="ml-form-fieldRow ml-last-item">
+                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                    <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Enter your email" autocomplete="email">
+                  </div>
+                </div>
+              </div>
+              <label class="beta-checkbox-wrap">
+                <input type="checkbox" id="beta-opt-in-beta" checked>
+                <span class="beta-checkbox-label">
+                  <strong>Interested in future beta testing?</strong><br>
+                  Sign me up to be considered for future test builds.
+                </span>
+              </label>
+              <div class="platform-selector" id="platform-selector-beta">
+                <p>Which platform?</p>
+                <label><input type="radio" name="beta_platform_b" value="iOS" checked> iOS (iPhone / iPad)</label>
+                <label><input type="radio" name="beta_platform_b" value="Android"> Android</label>
+              </div>
+              <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field-beta" value="Yes">
+              <input type="hidden" name="fields[platform]" id="platform-hidden-field-beta" value="iOS">
+              <input type="hidden" name="ml-submit" value="1">
+              <div class="ml-form-embedSubmit">
+                <button type="submit" class="primary">Notify Me About Future Betas</button>
+              </div>
+              <input type="hidden" name="anticsrf" value="true">
+            </form>
+          </div>
+          <div class="ml-form-successBody row-success" style="display:none">
+            <div class="ml-form-successContent">
+              <h4 id="beta-success-heading">You're on the list!</h4>
+              <p id="beta-success-msg">Thanks — we'll reach out when a future beta opens up.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="modal-sub">No spam. Just a heads up when a beta opens.</p>
   </div>
+
+  <script>
+    // Pre-show platform selector since beta checkbox starts checked
+    document.getElementById('platform-selector-beta').style.display = 'block';
+
+    document.getElementById('beta-opt-in-beta').addEventListener('change', function() {
+      document.getElementById('beta-hidden-field-beta').value = this.checked ? 'Yes' : 'No';
+      document.getElementById('platform-selector-beta').style.display = this.checked ? 'block' : 'none';
+      document.getElementById('platform-hidden-field-beta').value = this.checked
+        ? (document.querySelector('input[name="beta_platform_b"]:checked')?.value || 'iOS')
+        : '';
+    });
+
+    document.querySelectorAll('input[name="beta_platform_b"]').forEach(r => {
+      r.addEventListener('change', function() {
+        document.getElementById('platform-hidden-field-beta').value = this.value;
+      });
+    });
+
+    function ml_webform_success_38567556() {
+      var $ = window.ml_jQuery || window.jQuery;
+      if (!$) return;
+      $('.ml-subscribe-form-38567556 .row-success').show();
+      $('.ml-subscribe-form-38567556 .row-form').hide();
+    }
+  </script>
+  <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
+  <script>
+    fetch('https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/takel');
+  </script>
 </body>
 </html>

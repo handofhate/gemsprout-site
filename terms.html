@@ -24,10 +24,21 @@
       padding: 40px 24px;
       text-align: center;
       color: #fff;
+      position: relative;
     }
     header img { width: 72px; height: 72px; margin-bottom: 12px; }
     header h1 { font-size: 1.8rem; font-weight: 800; }
     header p { font-size: 0.95rem; opacity: 0.8; margin-top: 4px; }
+    .back-link {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-link:hover { color: #fff; }
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -55,6 +66,7 @@
 <body>
 
 <header>
+  <a href="/" class="back-link">← Return to GemSprout</a>
   <img src="gemsproutpadded.png" alt="GemSprout logo">
   <h1>Terms of Service</h1>
   <p>GemSprout — Family Chores &amp; Rewards</p>

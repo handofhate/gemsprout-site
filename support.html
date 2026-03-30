@@ -24,10 +24,21 @@
       padding: 40px 24px;
       text-align: center;
       color: #fff;
+      position: relative;
     }
     header img { width: 72px; height: 72px; margin-bottom: 12px; }
     header h1 { font-size: 1.8rem; font-weight: 800; }
     header p { font-size: 0.95rem; opacity: 0.8; margin-top: 4px; }
+    .back-link {
+      position: absolute;
+      top: 16px;
+      left: 20px;
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .back-link:hover { color: #fff; }
     main {
       max-width: 720px;
       margin: 0 auto;
@@ -68,6 +79,7 @@
 <body>
 
 <header>
+  <a href="/" class="back-link">← Return to GemSprout</a>
   <img src="gemsproutpadded.png" alt="GemSprout logo">
   <h1>Support</h1>
   <p>GemSprout — Family Chores &amp; Rewards</p>
@@ -86,16 +98,16 @@
   <h2>Common Questions</h2>
 
   <h2>How do I add my family?</h2>
-  <p>When you first open GemSprout, a family code is automatically created for you. Share that code with other family members so they can join from their device under <strong>Settings → Join a Family</strong>.</p>
+  <p>Your family code is created when you first set up GemSprout. Kids join by entering the family code on their device. If you're inviting a second parent or partner, they sign in with their own Google or Apple account — they don't need the family code. Once they're in, they'll have full parent access.</p>
 
   <h2>How do I reset my data?</h2>
   <p>You can permanently delete all family data by going to <strong>Settings → Reset All Data</strong> inside the app. This cannot be undone.</p>
 
   <h2>I lost my family code — what do I do?</h2>
-  <p>Your family code is always visible in <strong>Settings → Family Code</strong>. If you no longer have access to any device with the app installed, contact us and we'll do our best to help.</p>
+  <p>Your family code is always visible in <strong>Settings → Family Code</strong>. Keep in mind the family code is primarily for kids to join — parents can always sign back into the parent dashboard using the same Google or Apple account they originally used. If you're still having trouble, contact us and we'll help.</p>
 
   <h2>Something isn't working right.</h2>
-  <p>In the app, go to <strong>Settings → Send Debug Log</strong> to email us a diagnostic report. This helps us identify and fix issues faster.</p>
+  <p>Email us at <a href="mailto:support@gemsprout.com">support@gemsprout.com</a> and describe what's happening. Screenshots are always helpful. We typically respond within 1–2 business days.</p>
 
   <h2>Privacy Policy</h2>
   <p>For information on how we handle your data, see our <a href="/privacy.html">Privacy Policy</a>.</p>
