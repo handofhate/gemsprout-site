@@ -9394,11 +9394,10 @@ function renderFamilyStatsLaunchCard(kids, histIdx) {
           <div class="stats-launch-spotlight-label">Current family savings</div>
         </div>
       </div>
-      <div class="stats-launch-gridline stats-launch-gridline-2x2">
+      <div class="stats-launch-gridline">
         <span class="stats-launch-chip"><strong>${choreHist.length}</strong><small>Tasks</small></span>
         <span class="stats-launch-chip"><strong>${totalPrizes}</strong><small>Prizes</small></span>
         <span class="stats-launch-chip"><strong>${kids.length}</strong><small>Kids</small></span>
-        <span class="stats-launch-chip"><strong>${cur}${totalSavings.toFixed(2)}</strong><small>Savings</small></span>
       </div>
     </button>`;
 }
@@ -9418,20 +9417,18 @@ function renderMemberStatsLaunchCard(member, histIdx, side = 'left') {
           </div>
         </div>
       </div>
-      <div class="stats-launch-spotlight-grid">
-        <div class="stats-launch-spotlight">
-          <div class="stats-launch-spotlight-value">${s.diamondsEarned}</div>
-          <div class="stats-launch-spotlight-label">Lifetime gems earned</div>
-        </div>
-        <div class="stats-launch-spotlight">
-          <div class="stats-launch-spotlight-value">${cur}${(s.savings || 0).toFixed(2)}</div>
-          <div class="stats-launch-spotlight-label">Current savings</div>
-        </div>
+      <div class="stats-launch-spotlight">
+        <div class="stats-launch-spotlight-value">${s.diamondsEarned}</div>
+        <div class="stats-launch-spotlight-label">Lifetime gems earned</div>
+      </div>
+      <div class="stats-launch-spotlight">
+        <div class="stats-launch-spotlight-value">${cur}${(s.savings || 0).toFixed(2)}</div>
+        <div class="stats-launch-spotlight-label">Current savings</div>
       </div>
       <div class="stats-launch-gridline stats-launch-gridline-2x2">
         <span class="stats-launch-chip"><strong>${s.choreDone}</strong><small>Tasks</small></span>
-        <span class="stats-launch-chip"><strong>${s.rewardCount}</strong><small>Prizes</small></span>
         <span class="stats-launch-chip"><strong>${streakValue}</strong><small>Streak</small></span>
+        <span class="stats-launch-chip"><strong>${s.rewardCount}</strong><small>Prizes</small></span>
         <span class="stats-launch-chip"><strong>${s.totalXP}</strong><small>Total XP</small></span>
       </div>
     </button>`;
