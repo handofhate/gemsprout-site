@@ -8,7 +8,7 @@ const FIREBASE_CONFIG = {
   measurementId:     "G-1WDH5Q2STT",
 };
 
-const TEST_BUILD_LABEL = 'Test v1.3';
+const TEST_BUILD_LABEL = 'Test v1.4';
 
 const FAMILY_CODE_KEY   = 'gemsprout.familyCode';
 const FAMILY_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/I/1
@@ -4836,6 +4836,7 @@ function replaceQuickActionModal(html, modalClass = '') {
 
 let _confirmModalNonce = 0;
 const _confirmModalActions = new Map();
+const _confirmModalSecondSteps = new Map();
 
 function _registerConfirmModalAction(fn) {
   const id = `confirm_${Date.now()}_${++_confirmModalNonce}`;
@@ -4846,9 +4847,18 @@ function _registerConfirmModalAction(fn) {
 function _runConfirmModalAction(id) {
   const fn = _confirmModalActions.get(id);
   _confirmModalActions.delete(id);
+  _confirmModalSecondSteps.delete(id);
   if (typeof fn !== 'function') return;
   closeModal();
   fn();
+}
+
+function _storeConfirmSecondStep(id, opts) {
+  _confirmModalSecondSteps.set(id, opts || {});
+}
+
+function _openConfirmSecondStep(id) {
+  _showConfirmSecondStep(id, _confirmModalSecondSteps.get(id) || {});
 }
 
 function _showConfirmSecondStep(id, opts = {}) {
@@ -4886,14 +4896,17 @@ function showDangerConfirm(opts = {}) {
     confirmText = 'delete',
   } = opts;
   const actionId = _registerConfirmModalAction(onConfirm);
+  if (doubleConfirm) {
+    _storeConfirmSecondStep(actionId, {
+      title: doubleConfirmTitle,
+      message: doubleConfirmMessage,
+      confirmLabel,
+      confirmText,
+      modalClass,
+    });
+  }
   const nextStep = doubleConfirm
-    ? `_showConfirmSecondStep('${actionId}', ${JSON.stringify({
-        title: doubleConfirmTitle,
-        message: doubleConfirmMessage,
-        confirmLabel,
-        confirmText,
-        modalClass,
-      })})`
+    ? `_openConfirmSecondStep('${actionId}')`
     : `_runConfirmModalAction('${actionId}')`;
   showQuickActionModal(`
     <div class="modal-title">${title}</div>
