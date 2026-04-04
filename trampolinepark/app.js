@@ -8,7 +8,7 @@ const FIREBASE_CONFIG = {
   measurementId:     "G-1WDH5Q2STT",
 };
 
-const TEST_BUILD_LABEL = 'Test v1.0';
+const TEST_BUILD_LABEL = 'Test v1.1';
 
 const FAMILY_CODE_KEY   = 'gemsprout.familyCode';
 const FAMILY_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/I/1
@@ -422,6 +422,7 @@ function _getWeekRange() {
   const dow = d.getDay();
   const end = new Date(d);
   end.setDate(d.getDate() - dow);         // back to most recent Sunday
+  if (dow === 0) end.setDate(end.getDate() - 7); // on Sunday, show the last fully completed week
   const start = new Date(end);
   start.setDate(end.getDate() - 6);       // Monday before that
   return { start: formatDateLocal(start), end: formatDateLocal(end) };
@@ -1074,7 +1075,7 @@ function _renderWeekReviewStory() {
       <div class="wr-scene">
         <button class="wr-tap wr-tap-left" aria-label="Previous story" onpointerdown="return handleWeekReviewPress('prev', event)" onpointerup="handleWeekReviewRelease('prev')" onpointercancel="handleWeekReviewRelease('prev')" onpointerleave="handleWeekReviewRelease('prev')" onclick="return handleWeekReviewTap('prev', event)"></button>
         <button class="wr-tap wr-tap-right" aria-label="Next story" onpointerdown="return handleWeekReviewPress('next', event)" onpointerup="handleWeekReviewRelease('next')" onpointercancel="handleWeekReviewRelease('next')" onpointerleave="handleWeekReviewRelease('next')" onclick="return handleWeekReviewTap('next', event)"></button>
-        <div class="wr-slide">
+        <div class="wr-slide" onpointerdown="return handleWeekReviewCardPress(event)" onpointerup="handleWeekReviewCardRelease()" onpointercancel="handleWeekReviewCardRelease()" onpointerleave="handleWeekReviewCardRelease()">
           <div class="wr-card ${slide.type === 'finale' ? 'wr-finale' : ''}" style="background:${slide.gradient}">
             ${slide.type === 'finale' ? `<div class="wr-finale-icon wr-reveal" style="--wr-delay:1s">${slide.icon}</div>` : ''}
             <div class="wr-card-label wr-reveal" style="--wr-delay:1s">${slide.icon}${slide.label}</div>
@@ -4744,6 +4745,22 @@ function showModal(html, opts = {}) {
 }
 
 let _weekReviewPress = null;
+
+function handleWeekReviewCardPress(ev) {
+  ev?.preventDefault?.();
+  _weekReviewPress = {
+    dir: 'hold',
+    startedAt: Date.now(),
+    suppressNav: true,
+  };
+  _weekReviewPause();
+  return false;
+}
+
+function handleWeekReviewCardRelease() {
+  if (_weekReviewPress?.dir === 'hold') _weekReviewPress = null;
+  _weekReviewResume();
+}
 
 function handleWeekReviewPress(dir, ev) {
   ev?.preventDefault?.();
