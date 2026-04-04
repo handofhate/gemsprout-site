@@ -8,7 +8,7 @@ const FIREBASE_CONFIG = {
   measurementId:     "G-1WDH5Q2STT",
 };
 
-const TEST_BUILD_LABEL = 'Test v1.1';
+const TEST_BUILD_LABEL = 'Test v1.2';
 
 const FAMILY_CODE_KEY   = 'gemsprout.familyCode';
 const FAMILY_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/I/1
@@ -590,11 +590,11 @@ function _buildWeekReviewSlides({ kidData, totalDiamonds, totalChores, totalSave
     bigStat: coverDateRange,
     dateRangeText: dateRange,
     subStat: introSub,
-    rows: previewCoverData.map(({ kid, streak }) => ({
+    rows: previewCoverData.map(({ kid, chores }) => ({
       avatar: renderMemberAvatarHtml(kid, '<i class="ph-duotone ph-smiley" style="color:#5b6f67;font-size:1.35rem"></i>'),
       name: kid.name,
       stat: kid.role === 'kid' ? `${kid.diamonds || 0} total gems` : 'Parent profile',
-      sub: streak > 0 ? `${streak} day streak` : 'Ready for next week'
+      sub: chores > 0 ? `${chores} task${chores === 1 ? '' : 's'} this week` : 'Ready for next week'
     }))
   });
 
@@ -1513,7 +1513,7 @@ function _weekReviewHTML(slides, currentIndex) {
       <div class="wr-scene">
         <button class="wr-tap wr-tap-left" aria-label="Previous story" onpointerdown="return handleWeekReviewPress('prev', event)" onpointerup="handleWeekReviewRelease('prev')" onpointercancel="handleWeekReviewRelease('prev')" onpointerleave="handleWeekReviewRelease('prev')" onclick="return handleWeekReviewTap('prev', event)"></button>
         <button class="wr-tap wr-tap-right" aria-label="Next story" onpointerdown="return handleWeekReviewPress('next', event)" onpointerup="handleWeekReviewRelease('next')" onpointercancel="handleWeekReviewRelease('next')" onpointerleave="handleWeekReviewRelease('next')" onclick="return handleWeekReviewTap('next', event)"></button>
-        <div class="wr-slide">
+        <div class="wr-slide" onpointerdown="return handleWeekReviewCardPress(event)" onpointerup="handleWeekReviewCardRelease()" onpointercancel="handleWeekReviewCardRelease()" onpointerleave="handleWeekReviewCardRelease()">
           ${_weekReviewCardBodyHTML(slide, { previewAttr, totalDiamonds, totalSaved, totalBadges })}
         </div>
       </div>
