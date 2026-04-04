@@ -8,7 +8,7 @@ const FIREBASE_CONFIG = {
   measurementId:     "G-1WDH5Q2STT",
 };
 
-const TEST_BUILD_LABEL = 'Test v1.2';
+const TEST_BUILD_LABEL = 'Test v1.3';
 
 const FAMILY_CODE_KEY   = 'gemsprout.familyCode';
 const FAMILY_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/I/1
@@ -3716,13 +3716,12 @@ function addShOverride() {
 }
 
 function removeShOverride(date) {
-  showQuickActionModal(`
-    <div class="modal-title">Remove Exception?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">The schedule exception for <strong>${date}</strong> will be removed.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doRemoveShOverride('${date}')">Remove</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Remove Exception?',
+    message: `The schedule exception for <strong>${date}</strong> will be removed.`,
+    confirmLabel: 'Remove',
+    onConfirm: () => _doRemoveShOverride(date),
+  });
 }
 
 function _doRemoveShOverride(date) {
@@ -4833,6 +4832,76 @@ function replaceQuickActionModal(html, modalClass = '') {
       <span aria-hidden="true">&times;</span>
     </button>
     ${html}`;
+}
+
+let _confirmModalNonce = 0;
+const _confirmModalActions = new Map();
+
+function _registerConfirmModalAction(fn) {
+  const id = `confirm_${Date.now()}_${++_confirmModalNonce}`;
+  _confirmModalActions.set(id, fn);
+  return id;
+}
+
+function _runConfirmModalAction(id) {
+  const fn = _confirmModalActions.get(id);
+  _confirmModalActions.delete(id);
+  if (typeof fn !== 'function') return;
+  closeModal();
+  fn();
+}
+
+function _showConfirmSecondStep(id, opts = {}) {
+  const {
+    title = 'Are you absolutely sure?',
+    message = 'This action cannot be undone.',
+    confirmLabel = 'Delete',
+    confirmText = 'delete',
+    modalClass = 'quick-action-modal-wide',
+  } = opts;
+  const safePhrase = String(confirmText || 'delete');
+  replaceQuickActionModal(`
+    <div class="modal-title">${title}</div>
+    <p style="margin:0 0 12px;color:var(--muted);font-size:0.95rem;line-height:1.5">${message}</p>
+    <p style="margin:0 0 10px;color:var(--muted);font-size:0.88rem">Type <strong>${esc(safePhrase)}</strong> below to continue:</p>
+    <input id="confirm-modal-input" type="text" autocomplete="off" autocorrect="off" spellcheck="false"
+      style="width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid #E5E7EB;border-radius:10px;font-size:1rem;margin-bottom:20px;outline:none"
+      oninput="document.getElementById('confirm-modal-btn').disabled=this.value.trim().toLowerCase()!=='${safePhrase.toLowerCase()}'">
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button id="confirm-modal-btn" class="btn btn-danger" disabled onclick="_runConfirmModalAction('${id}')">${confirmLabel}</button>
+    </div>`, modalClass);
+}
+
+function showDangerConfirm(opts = {}) {
+  const {
+    title = 'Are you sure?',
+    message = 'This action cannot be undone.',
+    confirmLabel = 'Delete',
+    onConfirm = () => {},
+    modalClass = 'quick-action-modal-wide',
+    doubleConfirm = false,
+    doubleConfirmTitle = 'Are you absolutely sure?',
+    doubleConfirmMessage = message,
+    confirmText = 'delete',
+  } = opts;
+  const actionId = _registerConfirmModalAction(onConfirm);
+  const nextStep = doubleConfirm
+    ? `_showConfirmSecondStep('${actionId}', ${JSON.stringify({
+        title: doubleConfirmTitle,
+        message: doubleConfirmMessage,
+        confirmLabel,
+        confirmText,
+        modalClass,
+      })})`
+    : `_runConfirmModalAction('${actionId}')`;
+  showQuickActionModal(`
+    <div class="modal-title">${title}</div>
+    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">${message}</p>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="${nextStep}">${confirmLabel}</button>
+    </div>`, modalClass);
 }
 
 function _initModalSwipe() {
@@ -7126,13 +7195,15 @@ function addMemberCard() {
 }
 
 function removeMemberCard(i) {
-  showQuickActionModal(`
-    <div class="modal-title">Remove Member?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">This family member will be removed from setup.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();S.setupMembers.splice(${i},1);renderSetupStep({ preserveScroll: true })">Remove</button>
-    </div>`, 'quick-action-modal-wide');
+  showDangerConfirm({
+    title: 'Remove Member?',
+    message: 'This family member will be removed from setup.',
+    confirmLabel: 'Remove',
+    onConfirm: () => {
+      S.setupMembers.splice(i, 1);
+      renderSetupStep({ preserveScroll: true });
+    },
+  });
 }
 
 function setMemberField(i, field, value, rerender=false) {
@@ -7171,13 +7242,15 @@ function addParentCard() {
 }
 
 function removeParentCard(i) {
-  showQuickActionModal(`
-    <div class="modal-title">Remove Parent?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">This parent will be removed from setup.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();S.setupParents.splice(${i},1);renderSetupStep({ preserveScroll: true })">Remove</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Remove Parent?',
+    message: 'This parent will be removed from setup.',
+    confirmLabel: 'Remove',
+    onConfirm: () => {
+      S.setupParents.splice(i, 1);
+      renderSetupStep({ preserveScroll: true });
+    },
+  });
 }
 
 function setParentField(i, field, value, rerender=false) {
@@ -8916,13 +8989,15 @@ function unlinkProvider(providerId) {
   if (!member?.authProviders?.length) return;
   const remaining = member.authProviders.filter(p => p.providerId !== providerId);
   if (remaining.length === 0) {
-    showQuickActionModal(`
-      <div class="modal-title">Remove Account?</div>
-      <p style="font-size:0.9rem;color:var(--muted);margin-bottom:16px">This is your only linked account. Removing it will sign you out.</p>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-        <button class="btn btn-primary" style="background:#EF4444;border-color:#EF4444" onclick="closeModal();_removeLastProviderAndSignOut()">Remove &amp; Sign Out</button>
-      </div>`);
+    showDangerConfirm({
+      title: 'Remove Account?',
+      message: 'This is your only linked account. Removing it will sign you out.',
+      confirmLabel: 'Remove &amp; Sign Out',
+      onConfirm: () => _removeLastProviderAndSignOut(),
+      doubleConfirm: true,
+      doubleConfirmMessage: 'Remove your last linked account from this device? Type <strong>remove</strong> to continue.',
+      confirmText: 'remove',
+    });
     return;
   }
   member.authProviders = remaining;
@@ -11198,13 +11273,14 @@ function saveChore(choreId) {
 
 function deleteChore(choreId) {
   const chore = D.chores.find(c => c.id === choreId);
-  showQuickActionModal(`
-    <div class="modal-title">Delete Chore?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${chore?.title || 'This task'}" will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doDeleteChore('${choreId}')">Delete</button>
-    </div>`, 'quick-action-modal-wide');
+  showDangerConfirm({
+    title: 'Delete Task?',
+    message: `"${esc(chore?.title || 'This task')}" will be permanently deleted.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => _doDeleteChore(choreId),
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete "${esc(chore?.title || 'this task')}" for good? This cannot be undone.`,
+  });
 }
 
 function _doDeleteChore(choreId) {
@@ -11574,13 +11650,14 @@ function deleteCustomLevel(idx) {
   const levels = getLevels().map(l => ({...l}));
   if (levels.length <= 2) { toast('Need at least 2 levels'); return; }
   const levelName = levels[idx]?.name || 'this level';
-  showQuickActionModal(`
-    <div class="modal-title">Delete Level?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${levelName}" will be permanently removed.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doDeleteCustomLevel(${idx})">Delete</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Delete Level?',
+    message: `"${esc(levelName)}" will be permanently removed.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => _doDeleteCustomLevel(idx),
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete "${esc(levelName)}" for good? Kids using this level will be affected.`,
+  });
 }
 
 function _doDeleteCustomLevel(idx) {
@@ -11593,13 +11670,15 @@ function _doDeleteCustomLevel(idx) {
 }
 
 function resetLevelsToDefault() {
-  showQuickActionModal(`
-    <div class="modal-title">Reset Levels?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">All custom levels will be replaced with the defaults. This cannot be undone.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doResetLevelsToDefault()">Reset</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Reset Levels?',
+    message: 'All custom levels will be replaced with the defaults. This cannot be undone.',
+    confirmLabel: 'Reset',
+    onConfirm: () => _doResetLevelsToDefault(),
+    doubleConfirm: true,
+    doubleConfirmMessage: 'Reset all custom levels back to the defaults? This cannot be undone.',
+    confirmText: 'reset',
+  });
 }
 
 function _doResetLevelsToDefault() {
@@ -11682,13 +11761,14 @@ function removeChoreBadgeTier(choreId, tierIdx) {
   if (!chore || !chore.badges) return;
   const badge = chore.badges[tierIdx];
   const badgeName = badge?.name || 'this badge tier';
-  showQuickActionModal(`
-    <div class="modal-title">Delete Badge Tier?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${badgeName}" will be permanently removed from <strong>${chore.title}</strong>.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doRemoveChoreBadgeTier('${choreId}',${tierIdx})">Delete</button>
-      </div>`);
+  showDangerConfirm({
+    title: 'Delete Badge Tier?',
+    message: `"${esc(badgeName)}" will be permanently removed from <strong>${esc(chore.title)}</strong>.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => _doRemoveChoreBadgeTier(choreId, tierIdx),
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete the "${esc(badgeName)}" badge tier permanently?`,
+  });
 }
 
 function _doRemoveChoreBadgeTier(choreId, tierIdx) {
@@ -11834,13 +11914,14 @@ function savePrize(prizeId) {
 
 function deletePrize(prizeId) {
   const prize = D.prizes.find(p => p.id === prizeId);
-  showQuickActionModal(`
-    <div class="modal-title">Delete Prize?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${prize?.title || 'This prize'}" will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doDeletePrize('${prizeId}')">Delete</button>
-    </div>`, 'quick-action-modal-wide');
+  showDangerConfirm({
+    title: 'Delete Prize?',
+    message: `"${esc(prize?.title || 'This prize')}" will be permanently deleted.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => _doDeletePrize(prizeId),
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete "${esc(prize?.title || 'this prize')}" for good? This cannot be undone.`,
+  });
 }
 
 function _doDeletePrize(prizeId) {
@@ -11977,13 +12058,14 @@ function saveGoal() {
 
 function clearGoal(goalId) {
   const goal = (D.teamGoals||[]).find(g => g.id === goalId);
-  showQuickActionModal(`
-    <div class="modal-title">Delete Team Prize?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${goal?.title || 'This team prize'}" will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doClearGoal('${goalId}')">Delete</button>
-    </div>`, 'quick-action-modal-wide');
+  showDangerConfirm({
+    title: 'Delete Team Prize?',
+    message: `"${esc(goal?.title || 'This team prize')}" will be permanently deleted.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => _doClearGoal(goalId),
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete "${esc(goal?.title || 'this team prize')}" for good? This cannot be undone.`,
+  });
 }
 
 function _doClearGoal(goalId) {
@@ -12090,13 +12172,12 @@ function advClearChoreCompletions(choreId, memberId) {
   if (!chore) return;
   const member = memberId ? getMember(memberId) : null;
   const what = member ? `${esc(member.name)}'s completions for "${esc(chore.title)}"` : `all completions for "${esc(chore.title)}"`;
-    showQuickActionModal(`
-    <div class="modal-title">Clear Completions?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">This will permanently clear ${what}. Task badge progress will be lost.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doAdvClearCompletions('${choreId}','${memberId||''}')">Clear</button>
-      </div>`);
+  showDangerConfirm({
+    title: 'Clear Completions?',
+    message: `This will permanently clear ${what}. Task badge progress will be lost.`,
+    confirmLabel: 'Clear',
+    onConfirm: () => _doAdvClearCompletions(choreId, memberId || ''),
+  });
 }
 
 function _doAdvClearCompletions(choreId, memberId) {
@@ -12133,13 +12214,12 @@ function advUpdateCompletion(choreId, memberId, entryId, field, rawValue) {
 function advDeleteCompletion(choreId, memberId, entryId) {
   const chore = D.chores.find(c => c.id === choreId);
   if (!chore) return;
-  showQuickActionModal(`
-    <div class="modal-title">Delete Completion?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">This completion entry will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doAdvDeleteCompletion('${choreId}','${memberId}','${entryId}')">Delete</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Delete Completion?',
+    message: 'This completion entry will be permanently deleted.',
+    confirmLabel: 'Delete',
+    onConfirm: () => _doAdvDeleteCompletion(choreId, memberId, entryId),
+  });
 }
 
 function _doAdvDeleteCompletion(choreId, memberId, entryId) {
@@ -12153,13 +12233,12 @@ function _doAdvDeleteCompletion(choreId, memberId, entryId) {
 }
 
 function advDeleteHistory(entryId) {
-  showQuickActionModal(`
-    <div class="modal-title">Delete Entry?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">This history entry will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();_doAdvDeleteHistory('${entryId}')">Delete</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Delete Entry?',
+    message: 'This history entry will be permanently deleted.',
+    confirmLabel: 'Delete',
+    onConfirm: () => _doAdvDeleteHistory(entryId),
+  });
 }
 
 function _doAdvDeleteHistory(entryId) {
@@ -12212,13 +12291,18 @@ function _advRefreshStatus(msg) {
 
 function _advDeleteTeamGoal(idx) {
   const goal = (D.teamGoals||[])[idx];
-  showQuickActionModal(`
-    <div class="modal-title">Delete Team Prize?</div>
-    <p style="margin:0 0 20px;color:var(--muted);font-size:0.95rem;line-height:1.5">"${goal?.title || 'This team prize'}" will be permanently deleted.</p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="closeModal();D.teamGoals.splice(${idx},1);saveData();_advRender()">Delete</button>
-    </div>`);
+  showDangerConfirm({
+    title: 'Delete Team Prize?',
+    message: `"${esc(goal?.title || 'This team prize')}" will be permanently deleted.`,
+    confirmLabel: 'Delete',
+    onConfirm: () => {
+      D.teamGoals.splice(idx, 1);
+      saveData();
+      _advRender();
+    },
+    doubleConfirm: true,
+    doubleConfirmMessage: `Delete "${esc(goal?.title || 'this team prize')}" for good? This cannot be undone.`,
+  });
 }
 
 function _advRender() {
@@ -12778,15 +12862,16 @@ function doAdjustSavings(memberId, sign) {
 }
 
 function switchFamily() {
-  showQuickActionModal(`
-    <div class="modal-title"><i class="ph-duotone ph-link-break" style="color:#EF4444;font-size:1.2rem;vertical-align:middle"></i> Join Different Family?</div>
-    <p style="color:var(--muted);font-size:0.88rem;margin-bottom:16px">
-      This will disconnect this device from your current family. Your family's data stays safe in the cloud; you'll just need the family code to rejoin.
-    </p>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-danger" onclick="_confirmSwitchFamily()">Continue</button>
-    </div>`);
+  showDangerConfirm({
+    title: '<i class="ph-duotone ph-link-break" style="color:#EF4444;font-size:1.2rem;vertical-align:middle"></i> Join Different Family?',
+    message: `This will disconnect this device from your current family. Your family's data stays safe in the cloud; you'll just need the family code to rejoin.`,
+    confirmLabel: 'Continue',
+    onConfirm: () => _confirmSwitchFamily(),
+    doubleConfirm: true,
+    doubleConfirmTitle: 'Leave This Family On This Device?',
+    doubleConfirmMessage: 'Disconnect this device from the current family? Type <strong>switch</strong> to continue.',
+    confirmText: 'switch',
+  });
 }
 
 function _confirmSwitchFamily() {
