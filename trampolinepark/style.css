@@ -554,8 +554,6 @@
       justify-content: space-between;
       gap: 16px;
       padding: 13px 0;
-      background: #F9FAFB;
-      border-radius: 11px;
       margin-bottom: 10px;
     }
     .toggle-label { font-weight: 600; font-size: 0.95rem; }
@@ -4811,11 +4809,179 @@
       gap: 14px;
     }
     .stats-launch-card {
-      min-height: 186px;
+      min-height: 230px;
       align-content: start;
+      gap: 12px;
+      padding: 16px 16px 15px;
+      background:
+        radial-gradient(circle at 18% 14%, rgba(255,255,255,0.82), transparent 28%),
+        linear-gradient(160deg, color-mix(in srgb, var(--stats-accent, #6C63FF) 10%, #fffaf1) 0%, #f4ede0 56%, #efe4d2 100%);
+      border: 1px solid color-mix(in srgb, var(--stats-accent, #6C63FF) 18%, rgba(83,67,48,0.08));
+      box-shadow: 0 16px 30px rgba(65, 48, 26, 0.10);
     }
     .stats-launch-card-family {
       grid-column: 1 / -1;
+    }
+    .stats-launch-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--stats-accent, #6C63FF) 68%, white), color-mix(in srgb, var(--stats-accent, #6C63FF) 86%, black 8%));
+      border-radius: 24px 0 0 24px;
+      opacity: 0.9;
+    }
+    .stats-launch-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .stats-launch-kicker {
+      font-size: 0.68rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: color-mix(in srgb, var(--stats-accent, #6C63FF) 58%, #6f7368);
+    }
+    .stats-launch-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid color-mix(in srgb, var(--stats-accent, #6C63FF) 18%, rgba(83,67,48,0.08));
+      color: #304239;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .stats-launch-head {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .stats-launch-avatar {
+      width: 62px;
+      height: 62px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,243,233,0.92));
+      border: 1px solid rgba(83, 67, 48, 0.08);
+      box-shadow: 0 14px 24px rgba(44, 37, 24, 0.09);
+      font-size: 2rem;
+      color: #20312a;
+      flex-shrink: 0;
+    }
+    .stats-launch-avatar-family {
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(237,245,240,0.92));
+      padding: 8px;
+    }
+    .stats-launch-hero {
+      min-width: 0;
+      display: grid;
+      gap: 4px;
+    }
+    .stats-launch-name {
+      font-size: 1.02rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #21312b;
+      line-height: 1.05;
+    }
+    .stats-launch-sub {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      line-height: 1.35;
+      color: #5e6b63;
+    }
+    .stats-launch-sub .stats-level-pill {
+      margin: 0;
+    }
+    .stats-launch-spotlight {
+      display: grid;
+      gap: 3px;
+      padding: 14px 14px 12px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(247,241,230,0.78));
+      border: 1px solid rgba(83, 67, 48, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.72);
+    }
+    .stats-launch-spotlight-value {
+      font-size: clamp(1.9rem, 5vw, 2.5rem);
+      font-weight: 900;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: #20312a;
+    }
+    .stats-launch-spotlight-label {
+      font-size: 0.78rem;
+      color: #67746c;
+      line-height: 1.3;
+    }
+    .stats-launch-ribbon {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .stats-launch-ribbon span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      color: #55645c;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border: 1px solid rgba(83,67,48,0.06);
+      white-space: nowrap;
+    }
+    .stats-launch-ribbon strong {
+      color: #21312b;
+      font-weight: 900;
+    }
+    .stats-launch-gridline {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .stats-launch-chip {
+      display: grid;
+      gap: 2px;
+      min-width: 0;
+      padding: 10px 9px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.66);
+      border: 1px solid rgba(83,67,48,0.06);
+      color: #5a675f;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.7);
+    }
+    .stats-launch-chip strong {
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #21312b;
+      line-height: 1.05;
+    }
+    .stats-launch-chip small {
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
     .stats-panel-body {
       padding-top: 18px;
@@ -4907,6 +5073,31 @@
       color: #6b7280;
       text-transform: uppercase;
       letter-spacing: 0.04em;
+    }
+    @media (max-width: 640px) {
+      .stats-launch-card {
+        min-height: 214px;
+        padding: 14px 14px 13px;
+        gap: 10px;
+      }
+      .stats-launch-avatar {
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        font-size: 1.8rem;
+      }
+      .stats-launch-name {
+        font-size: 0.96rem;
+      }
+      .stats-launch-spotlight-value {
+        font-size: clamp(1.7rem, 7vw, 2.15rem);
+      }
+      .stats-launch-gridline {
+        gap: 6px;
+      }
+      .stats-launch-chip {
+        padding: 9px 7px;
+      }
     }
     .stats-panel-tile-sub {
       font-size: 0.7rem;

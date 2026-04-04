@@ -9373,38 +9373,69 @@ function renderFamilyStatsLaunchCard(kids, histIdx) {
   const choreHist = allHist.filter(h => h.type === 'chore');
   const totalDiamonds = kids.reduce((s, k) => s + (k.totalEarned || 0), 0);
   const totalPrizes = D.prizes.reduce((s, p) => s + (p.redemptions || []).length, 0);
+  const topKid = kids.slice().sort((a, b) => (b.totalEarned || 0) - (a.totalEarned || 0))[0];
   return `
-    <button class="snapshot-summary-card stats-launch-card stats-launch-card-family" type="button" onclick="openStatsDetailPanel('family')">
-      <div class="snapshot-summary-top">
-        <div class="snapshot-summary-avatar"><img src="gemsproutpadded.png" alt="" style="width:100%;height:100%;border-radius:18px"></div>
+    <button class="snapshot-summary-card stats-launch-card stats-launch-card-family" type="button" onclick="openStatsDetailPanel('family')" style="--stats-accent:#365e4f">
+      <div class="stats-launch-topline">
+        <span class="stats-launch-kicker">Family Collection</span>
+        <span class="stats-launch-badge">${kids.length} kids</span>
       </div>
-      <div class="snapshot-summary-name-row">
-        <div class="snapshot-summary-name">${esc(D.family.name || 'The Family')}</div>
+      <div class="stats-launch-head">
+        <div class="stats-launch-avatar stats-launch-avatar-family"><img src="gemsproutpadded.png" alt="" style="width:100%;height:100%;border-radius:18px"></div>
+        <div class="stats-launch-hero">
+          <div class="stats-launch-name">${esc(D.family.name || 'The Family')}</div>
+          <div class="stats-launch-sub">Lifetime household totals with a quick pulse check.</div>
+        </div>
       </div>
-      <div class="snapshot-summary-sub">Combined lifetime stats across the whole household.</div>
-      <div class="snapshot-summary-chips">
-        <span class="snapshot-summary-chip"><strong>${choreHist.length}</strong><small>tasks</small></span>
-        <span class="snapshot-summary-chip"><strong>${totalDiamonds}</strong><small>gems</small></span>
-        <span class="snapshot-summary-chip"><strong>${totalPrizes}</strong><small>prizes</small></span>
+      <div class="stats-launch-spotlight">
+        <div class="stats-launch-spotlight-value">${totalDiamonds}</div>
+        <div class="stats-launch-spotlight-label">Gems earned across the family</div>
+      </div>
+      <div class="stats-launch-ribbon">
+        <span><strong>${choreHist.length}</strong> tasks done</span>
+        <span><strong>${totalPrizes}</strong> prizes claimed</span>
+        <span><strong>${topKid ? esc(topKid.name) : 'No one yet'}</strong> top earner</span>
+      </div>
+      <div class="stats-launch-gridline">
+        <span class="stats-launch-chip"><strong>${choreHist.length}</strong><small>Tasks</small></span>
+        <span class="stats-launch-chip"><strong>${totalDiamonds}</strong><small>Gems</small></span>
+        <span class="stats-launch-chip"><strong>${totalPrizes}</strong><small>Prizes</small></span>
       </div>
     </button>`;
 }
 
 function renderMemberStatsLaunchCard(member, histIdx, side = 'left') {
   const s = buildMemberStats(member, histIdx);
+  const streakValue = D.settings.streakEnabled !== false ? (member.streak?.current || 0) : null;
+  const levelName = D.settings.levelingEnabled !== false ? s.currentLevel.name : 'Collector';
   return `
-    <button class="snapshot-summary-card stats-launch-card" type="button" onclick="openStatsDetailPanel('kid','${member.id}','${side}')">
-      <div class="snapshot-summary-top">
-        <div class="snapshot-summary-avatar">${renderMemberAvatarHtml(member)}</div>
+    <button class="snapshot-summary-card stats-launch-card" type="button" onclick="openStatsDetailPanel('kid','${member.id}','${side}')" style="--stats-accent:${member.color || '#6C63FF'}">
+      <div class="stats-launch-topline">
+        <span class="stats-launch-kicker">Collector Card</span>
+        <span class="stats-launch-badge">${levelName}</span>
       </div>
-      <div class="snapshot-summary-name-row">
-        <div class="snapshot-summary-name">${esc(member.name)}</div>
+      <div class="stats-launch-head">
+        <div class="stats-launch-avatar">${renderMemberAvatarHtml(member)}</div>
+        <div class="stats-launch-hero">
+          <div class="stats-launch-name">${esc(member.name)}</div>
+          <div class="stats-launch-sub">
+            ${D.settings.levelingEnabled !== false ? `${s.currentLevel.icon}<span>${s.currentLevel.name}</span>` : `${s.choreDone} tasks completed`}
+          </div>
+        </div>
       </div>
-      <div class="snapshot-summary-sub">${D.settings.levelingEnabled !== false ? `<span class="stats-level-pill">${s.currentLevel.icon}<span>${s.currentLevel.name}</span></span>` : `${s.choreDone} tasks completed`}</div>
-      <div class="snapshot-summary-chips">
-        <span class="snapshot-summary-chip"><strong>${s.choreDone}</strong><small>tasks</small></span>
-        <span class="snapshot-summary-chip"><strong>${s.diamondsEarned}</strong><small>gems</small></span>
-        <span class="snapshot-summary-chip"><strong>${s.rewardCount}</strong><small>prizes</small></span>
+      <div class="stats-launch-spotlight">
+        <div class="stats-launch-spotlight-value">${s.diamondsEarned}</div>
+        <div class="stats-launch-spotlight-label">Lifetime gems earned</div>
+      </div>
+      <div class="stats-launch-ribbon">
+        <span><strong>${s.choreDone}</strong> tasks</span>
+        <span><strong>${s.rewardCount}</strong> prizes</span>
+        <span><strong>${streakValue ?? 0}</strong> day streak</span>
+      </div>
+      <div class="stats-launch-gridline">
+        <span class="stats-launch-chip"><strong>${s.choreDone}</strong><small>Tasks</small></span>
+        <span class="stats-launch-chip"><strong>${s.rewardCount}</strong><small>Prizes</small></span>
+        <span class="stats-launch-chip"><strong>${streakValue ?? 0}</strong><small>Streak</small></span>
       </div>
     </button>`;
 }
