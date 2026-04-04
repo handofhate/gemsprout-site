@@ -8,6 +8,8 @@ const FIREBASE_CONFIG = {
   measurementId:     "G-1WDH5Q2STT",
 };
 
+const TEST_BUILD_LABEL = 'Test v1.0';
+
 const FAMILY_CODE_KEY   = 'gemsprout.familyCode';
 const FAMILY_CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no ambiguous 0/O/I/1
 
@@ -37,6 +39,11 @@ function getFamilyCode() {
 
 function setFamilyCode(code) {
   try { localStorage.setItem(FAMILY_CODE_KEY, code); } catch (_) {}
+}
+
+function applyTestBuildBadge() {
+  const badge = document.getElementById('test-build-badge');
+  if (badge) badge.textContent = TEST_BUILD_LABEL;
 }
 
 function getFamilyDoc() {
@@ -12970,6 +12977,7 @@ function routeAfterLoad() {
 }
 
 function init() {
+  applyTestBuildBadge();
   window.speechSynthesis?.getVoices(); // prime async voice loading on iOS
 
   // Re-render settings if it's open when Firebase auth state resolves (async on app restore).
