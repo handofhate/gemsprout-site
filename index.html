@@ -242,14 +242,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      justify-items: center;
       gap: 18px;
-    }
-
-    .hero-character {
-      width: min(100%, 320px);
-      height: auto;
-      filter: drop-shadow(0 22px 34px rgba(29, 77, 63, 0.18));
     }
 
     .hero-mark-chip {
@@ -265,6 +258,7 @@
       font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       font-weight: 700;
       letter-spacing: 0.01em;
+      justify-self: start;
     }
 
     .hero-mark-chip img {
@@ -273,11 +267,60 @@
       object-fit: contain;
     }
 
+    .hero-brand-block {
+      display: grid;
+      gap: 12px;
+      justify-items: start;
+    }
+
+    .hero-brand-block h2 {
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      color: var(--pine-deep);
+      max-width: 8ch;
+    }
+
+    .hero-brand-block p {
+      color: var(--muted);
+      max-width: 34ch;
+      font-size: 0.98rem;
+    }
+
     .hero-pills {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-metric {
+      padding: 16px 14px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      box-shadow: 0 12px 24px rgba(29, 77, 63, 0.07);
+    }
+
+    .hero-metric strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--pine-deep);
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .hero-metric span {
+      color: var(--muted);
+      font-size: 0.88rem;
     }
 
     .pill {
@@ -844,6 +887,10 @@
         flex-direction: column;
       }
 
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+
       .pill {
         width: 100%;
         justify-content: center;
@@ -937,15 +984,32 @@
         </div>
         <div class="hero-panel">
           <div class="hero-art">
-            <img src="brand/gemsproutcolor.png" alt="GemSprout mark" class="hero-character">
             <div class="hero-mark-chip">
               <img src="brand/gemsproutmono.png" alt="">
               Calm family growth
+            </div>
+            <div class="hero-brand-block">
+              <h2>Designed for real family life.</h2>
+              <p>GemSprout gives routines, rewards, savings, and shared progress one calm visual system instead of a noisy chore chart.</p>
             </div>
             <div class="hero-pills">
               <span class="pill"><i class="fa-solid fa-seedling"></i> Family rhythms</span>
               <span class="pill money"><i class="fa-solid fa-piggy-bank"></i> Savings goals</span>
               <span class="pill family"><i class="fa-solid fa-people-group"></i> Shared wins</span>
+            </div>
+            <div class="hero-metrics">
+              <div class="hero-metric">
+                <strong>Kid-first</strong>
+                <span>Clear, gentle daily flow</span>
+              </div>
+              <div class="hero-metric">
+                <strong>Parent control</strong>
+                <span>Approvals, savings, and rewards</span>
+              </div>
+              <div class="hero-metric">
+                <strong>Shared progress</strong>
+                <span>Celebrations and weekly recaps</span>
+              </div>
             </div>
             <div class="hero-note">
               <strong>Designed for real homes, not idealized ones.</strong>
