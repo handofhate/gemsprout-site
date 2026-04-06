@@ -3,146 +3,206 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy — GemSprout</title>
+  <title>Privacy Policy | GemSprout</title>
+  <link rel="icon" type="image/png" href="gemsproutpadded.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --purple: #6C63FF;
-      --bg: #F0F4FF;
-      --text: #2D3047;
-      --muted: #6B7280;
-      --border: #E5E7EB;
+      --pine: #1d4d3f;
+      --pine-deep: #16392f;
+      --sprout: #2f7a63;
+      --ink: #20322b;
+      --muted: #607168;
+      --border: rgba(32, 50, 43, 0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(47, 122, 99, 0.08), transparent 30%),
+        linear-gradient(180deg, #f6efdf 0%, #fbf8f1 100%);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    h1, h2, .back-link, .meta, .brand {
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    .shell {
+      width: min(820px, calc(100% - 32px));
+      margin: 0 auto;
     }
     header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 40px 24px;
-      text-align: center;
-      color: #fff;
-      position: relative;
+      padding: 26px 0 32px;
     }
-    header img { width: 72px; height: 72px; margin-bottom: 12px; }
-    header h1 { font-size: 1.8rem; font-weight: 800; }
-    header p { font-size: 0.95rem; opacity: 0.8; margin-top: 4px; }
     .back-link {
-      position: absolute;
-      top: 16px;
-      left: 20px;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.88rem;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--pine);
       text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 22px;
     }
-    .back-link:hover { color: #fff; }
+    .hero {
+      background: rgba(255, 253, 247, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(22, 57, 47, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .hero img {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      box-shadow: 0 16px 30px rgba(29, 77, 63, 0.12);
+    }
+    .brand {
+      color: var(--sprout);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--pine-deep);
+      margin-bottom: 6px;
+    }
+    .hero p {
+      color: var(--muted);
+      margin: 0;
+    }
     main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 16px 0 72px;
+    }
+    .content {
+      background: rgba(255, 253, 247, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px 28px 38px;
+      box-shadow: 0 24px 70px rgba(22, 57, 47, 0.06);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
     }
     h2 {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: var(--purple);
-      margin: 32px 0 10px;
+      color: var(--pine);
+      margin: 30px 0 10px;
     }
-    p { margin-bottom: 12px; color: var(--text); }
-    ul { margin: 8px 0 12px 20px; }
-    li { margin-bottom: 6px; }
-    a { color: var(--purple); }
-    .updated {
-      font-size: 0.85rem;
+    p { margin-bottom: 12px; }
+    ul { margin: 8px 0 12px 22px; }
+    li { margin-bottom: 8px; }
+    a { color: var(--pine); }
+    .links {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
       color: var(--muted);
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 24px, 820px); }
+      .hero, .content {
+        border-radius: 24px;
+      }
+      .hero {
+        padding: 22px;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="shell">
+    <a href="/" class="back-link">← Return to GemSprout</a>
+    <div class="hero">
+      <img src="gemsproutpadded.png" alt="GemSprout logo">
+      <div>
+        <div class="brand">GemSprout</div>
+        <h1>Privacy Policy</h1>
+        <p>How we collect, store, and protect family information inside GemSprout.</p>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <a href="/" class="back-link">← Return to GemSprout</a>
-  <img src="gemsproutpadded.png" alt="GemSprout logo">
-  <h1>Privacy Policy</h1>
-  <p>GemSprout — Family Chores &amp; Rewards</p>
-</header>
+  <main class="shell">
+    <div class="content">
+      <p class="meta">Last updated: March 29, 2026</p>
 
-<main>
-  <p class="updated">Last updated: March 29, 2026</p>
+      <p>GemSprout ("we", "our", or "us") is a family chore and rewards app. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information. By using GemSprout, you agree to this policy.</p>
 
-  <p>GemSprout ("we", "our", or "us") is a family chore and rewards app. This Privacy Policy explains what information we collect, how we use it, and your rights regarding that information. By using GemSprout, you agree to this policy.</p>
+      <h2>Information We Collect</h2>
+      <p>GemSprout does not require you to create an account or provide personal identifying information such as your name, email address, or phone number. The information we store includes:</p>
+      <ul>
+        <li><strong>Family data</strong> - family name, member names, ages, avatars, chore lists, reward prizes, and completion history. This data is entered by you and stored in your family's private cloud document.</li>
+        <li><strong>Chore photos</strong> - if you use the before/after photo feature, photos are uploaded to secure cloud storage and associated with your family's data.</li>
+        <li><strong>App settings</strong> - preferences such as timezone, notification settings, and feature toggles.</li>
+        <li><strong>Authentication tokens</strong> - parents who sign in with Google or Apple Sign-In are identified by a Firebase authentication token linked to their Google or Apple account. Kid devices use Firebase Anonymous Authentication, which generates a random identifier not linked to any personal identity.</li>
+      </ul>
 
-  <h2>Information We Collect</h2>
-  <p>GemSprout does not require you to create an account or provide any personal identifying information such as your name, email address, or phone number. The information we store includes:</p>
-  <ul>
-    <li><strong>Family data</strong> — family name, member names, ages, avatars, chore lists, reward prizes, and completion history. This data is entered by you and stored in your family's private cloud document.</li>
-    <li><strong>Chore photos</strong> — if you use the before/after photo feature, photos are uploaded to secure cloud storage and associated with your family's data.</li>
-    <li><strong>App settings</strong> — preferences such as timezone, notification settings, and feature toggles.</li>
-    <li><strong>Authentication tokens</strong> — parents who sign in with Google or Apple Sign-In are identified by a Firebase authentication token linked to their Google or Apple account. Kid devices use Firebase Anonymous Authentication, which generates a random identifier not linked to any personal identity.</li>
-  </ul>
+      <h2>How We Use Your Information</h2>
+      <p>All data collected is used solely to provide the GemSprout app experience. Specifically:</p>
+      <ul>
+        <li>To sync your family's chores, rewards, and progress across devices using your family code.</li>
+        <li>To display chore completion history and earn streaks, badges, and rewards.</li>
+        <li>To store chore photos for before/after verification.</li>
+      </ul>
+      <p>We do not use your data for advertising, analytics profiling, or any purpose beyond operating the app.</p>
 
-  <h2>How We Use Your Information</h2>
-  <p>All data collected is used solely to provide the GemSprout app experience. Specifically:</p>
-  <ul>
-    <li>To sync your family's chores, rewards, and progress across devices using your family code.</li>
-    <li>To display chore completion history and earn streaks, badges, and rewards.</li>
-    <li>To store chore photos for before/after verification.</li>
-  </ul>
-  <p>We do not use your data for advertising, analytics profiling, or any purpose beyond operating the app.</p>
+      <h2>Children's Privacy and COPPA Compliance</h2>
+      <p>GemSprout is designed for use by families, including children under 13. We take children's privacy seriously and comply with the Children's Online Privacy Protection Act (COPPA) and applicable state and federal children's privacy laws.</p>
+      <p><strong>No direct data collection from children.</strong> GemSprout does not collect personal information directly from children. Children do not create accounts, enter their own information, or communicate with us through the app. All information about children - including names, ages, and avatars - is entered by a parent or guardian and remains under that parent or guardian's control at all times.</p>
+      <p><strong>Parental consent and control.</strong> By creating a GemSprout family account, the parent or guardian provides consent for the app to store their family's information, including their children's names, ages, avatars, and chore history. Parents and guardians may review, update, or permanently delete all family data at any time from within the app (Settings -> Reset All Data). To request deletion of your family's data or ask questions about your child's information, contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
+      <p><strong>What information is stored about children.</strong> The app stores the following information about children, as entered by a parent or guardian:</p>
+      <ul>
+        <li>First name or nickname</li>
+        <li>Age (used to tailor the in-app experience)</li>
+        <li>Avatar selection chosen from within the app</li>
+        <li>Chore completion history, earned rewards, and streak or badge progress</li>
+        <li>Chore photos, if the before/after photo feature is used</li>
+      </ul>
+      <p><strong>No advertising or marketing to children.</strong> We do not use children's information for advertising or marketing purposes. No child data is shared with, sold to, or used by third parties for commercial purposes.</p>
+      <p><strong>Third-party services.</strong> Children's data is stored using Google Firebase. Firebase's handling of children's data is governed by <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>. We do not use advertising networks, analytics tools, or other third-party services that would have access to children's data.</p>
+      <p><strong>Kid devices.</strong> When a child uses GemSprout on a shared or dedicated device, the device connects to the family's data using a private family code. Kid devices use Firebase Anonymous Authentication - a randomly generated identifier that is not linked to any name, email address, or personal identity.</p>
+      <p><strong>Contact for COPPA inquiries.</strong> Parents and guardians may contact us at any time to review the information we have stored about their children, request corrections, or request permanent deletion. Contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
 
-  <h2>Children's Privacy and COPPA Compliance</h2>
-  <p>GemSprout is designed for use by families, including children under 13. We take children's privacy seriously and comply with the Children's Online Privacy Protection Act (COPPA) and applicable state and federal children's privacy laws.</p>
+      <h2>Data Storage and Security</h2>
+      <p>Your family's data is stored using Google Firebase (Firestore and Firebase Storage), a secure cloud platform. Data is protected by Firebase security rules that restrict access to your family's unique code. Chore photos are stored in Firebase Storage under your family's private path.</p>
+      <p>We do not sell, trade, or otherwise transfer your data to outside parties.</p>
 
-  <p><strong>No direct data collection from children.</strong> GemSprout does not collect personal information directly from children. Children do not create accounts, enter their own information, or communicate with us in any way through the App. All information about children — including names, ages, and avatars — is entered by a parent or guardian and remains under the parent's or guardian's control at all times.</p>
+      <h2>Third-Party Services</h2>
+      <p>GemSprout uses the following third-party services to operate:</p>
+      <ul>
+        <li><strong>Google Firebase</strong> - data storage, authentication, and file storage. Subject to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a>.</li>
+      </ul>
 
-  <p><strong>Parental consent and control.</strong> By creating a GemSprout family account, the parent or guardian provides consent for the App to store their family's information, including their children's names, ages, avatars, and chore history. Parents and guardians may review, update, or permanently delete all family data at any time from within the App (Settings → Reset All Data). To request deletion of your family's data or to ask questions about your child's information, contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
+      <h2>Data Retention and Deletion</h2>
+      <p>Your family's data is retained as long as you use the app. You can permanently delete all data at any time by going to <strong>Settings -> Reset All Data</strong> within the app. This will remove your family's data from our servers. Chore photos stored in Firebase Storage will also be removed.</p>
 
-  <p><strong>What information is stored about children.</strong> The App stores the following information about children, as entered by a parent or guardian:</p>
-  <ul>
-    <li>First name or nickname</li>
-    <li>Age (used to tailor in-app experience)</li>
-    <li>Avatar selection (a pre-set emoji or image chosen from within the app)</li>
-    <li>Chore completion history, earned rewards, and streak/badge progress</li>
-    <li>Chore photos, if the before/after photo feature is used (stored temporarily and deleted upon chore approval)</li>
-  </ul>
+      <h2>Your Rights</h2>
+      <p>You have the right to access, correct, or delete any personal data associated with your family at any time. Since GemSprout does not require account creation, all data management is done directly within the app.</p>
 
-  <p><strong>No advertising or marketing to children.</strong> We do not use children's information for advertising or marketing purposes. No child data is shared with, sold to, or used by third parties for commercial purposes.</p>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Changes will be posted here with an updated date. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
 
-  <p><strong>Third-party services.</strong> Children's data is stored using Google Firebase (as described in the Data Storage section below). Firebase's handling of children's data is governed by <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>. We do not use any advertising networks, analytics tools, or other third-party services that would have access to children's data.</p>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about this Privacy Policy or your data, please contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
 
-  <p><strong>Kid devices.</strong> When a child uses GemSprout on a shared or dedicated device, the device connects to the family's data using a private family code. Kid devices use Firebase Anonymous Authentication — a randomly generated identifier that is not linked to any name, email address, or personal identity.</p>
-
-  <p><strong>Contact for COPPA inquiries.</strong> Parents and guardians may contact us at any time to review the information we have stored about their children, request corrections, or request permanent deletion. Contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
-
-  <h2>Data Storage and Security</h2>
-  <p>Your family's data is stored using Google Firebase (Firestore and Firebase Storage), a secure cloud platform. Data is protected by Firebase security rules that restrict access to your family's unique code. Chore photos are stored in Firebase Storage under your family's private path.</p>
-  <p>We do not sell, trade, or otherwise transfer your data to outside parties.</p>
-
-  <h2>Third-Party Services</h2>
-  <p>GemSprout uses the following third-party services to operate:</p>
-  <ul>
-    <li><strong>Google Firebase</strong> — data storage, authentication, and file storage. Subject to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
-  </ul>
-
-  <h2>Data Retention and Deletion</h2>
-  <p>Your family's data is retained as long as you use the app. You can permanently delete all data at any time by going to <strong>Settings → Reset All Data</strong> within the app. This will remove your family's data from our servers. Chore photos stored in Firebase Storage will also be removed.</p>
-
-  <h2>Your Rights</h2>
-  <p>You have the right to access, correct, or delete any personal data associated with your family at any time. Since GemSprout does not require account creation, all data management is done directly within the app.</p>
-
-  <h2>Changes to This Policy</h2>
-  <p>We may update this Privacy Policy from time to time. Changes will be posted here with an updated date. Continued use of the app after changes constitutes acceptance of the updated policy.</p>
-
-  <h2>Contact Us</h2>
-  <p>If you have any questions about this Privacy Policy or your data, please contact us at:</p>
-  <p><a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a></p>
-  <p style="margin-top:24px;font-size:0.9rem;color:var(--muted)">See also: <a href="terms.html">Terms of Service</a></p>
-</main>
-
+      <div class="links">See also: <a href="/terms.html">Terms of Service</a> and <a href="/support.html">Support</a>.</div>
+    </div>
+  </main>
 </body>
 </html>

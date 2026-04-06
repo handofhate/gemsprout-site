@@ -3,356 +3,637 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GemSprout — Chores & Rewards for Families</title>
-  <meta name="description" content="Make chores feel like a game. Kids earn gems, level up, hit streaks, and unlock rewards they actually want.">
+  <title>GemSprout | Gentle motivation for family rhythms, rewards, and savings</title>
+  <meta name="description" content="GemSprout helps families build steadier rhythms with rewards, savings, celebrations, and a kid experience that feels warm, calm, and motivating.">
   <link rel="icon" type="image/png" href="gemsproutpadded.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
     :root {
-      --purple: #6C63FF;
-      --teal:   #43D9AD;
-      --yellow: #FFD93D;
-      --green:  #6BCB77;
-      --bg:     #F0F4FF;
-      --text:   #2D3047;
-      --muted:  #6B7280;
-      --card:   #FFFFFF;
-      --border: #E5E7EB;
+      --pine: #1d4d3f;
+      --pine-deep: #16392f;
+      --sprout: #2f7a63;
+      --sprout-soft: #dceee6;
+      --cream: #f7f1e5;
+      --cream-deep: #efe4d0;
+      --gold: #d8b25b;
+      --clay: #b46f4b;
+      --ink: #20322b;
+      --muted: #5f7068;
+      --card: rgba(255, 255, 255, 0.82);
+      --card-solid: #fffdf7;
+      --border: rgba(32, 50, 43, 0.1);
+      --shadow: 0 28px 80px rgba(25, 47, 39, 0.12);
+      --shadow-strong: 0 30px 90px rgba(22, 57, 47, 0.18);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(216, 178, 91, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(47, 122, 99, 0.16), transparent 34%),
+        linear-gradient(180deg, #f6efdf 0%, #fbf8f1 26%, #f5efe2 100%);
+      color: var(--ink);
       line-height: 1.6;
     }
 
-    /* NAV */
+    h1, h2, h3, .nav-logo, .btn, .pill, .section-label, .price, .eyebrow {
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
     nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 32px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(247, 241, 229, 0.78);
+      border-bottom: 1px solid rgba(29, 77, 63, 0.08);
     }
-    .nav-logo {
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 16px 0;
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 800;
-      font-size: 1.2rem;
-      color: var(--purple);
-      text-decoration: none;
+      justify-content: space-between;
+      gap: 16px;
     }
-    .nav-logo img {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-    }
-    .nav-cta {
-      background: var(--purple);
-      color: #fff;
-      padding: 10px 22px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .nav-cta:hover { opacity: 0.85; }
 
-    /* HERO */
+    .nav-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: var(--pine-deep);
+    }
+
+    .nav-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(29, 77, 63, 0.16);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(22, 57, 47, 0.12);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--sprout) 0%, var(--pine) 100%);
+      color: #fff;
+      padding: 14px 24px;
+      box-shadow: 0 16px 36px rgba(29, 77, 63, 0.22);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 253, 247, 0.78);
+      color: var(--pine-deep);
+      border-color: rgba(29, 77, 63, 0.12);
+      padding: 13px 22px;
+    }
+
     .hero {
+      padding: 64px 0 44px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 253, 247, 0.72);
+      border: 1px solid rgba(29, 77, 63, 0.1);
+      color: var(--pine);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #e7c982);
+      box-shadow: 0 0 0 6px rgba(216, 178, 91, 0.16);
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      line-height: 0.98;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--pine-deep);
+      margin-bottom: 18px;
+      max-width: 10.8ch;
+    }
+
+    .hero-copy p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 26px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    .hero-sub strong {
+      color: var(--pine);
+      font-weight: 700;
+    }
+
+    .hero-panel {
+      position: relative;
+      padding: 28px;
+      border-radius: 34px;
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.82), rgba(252, 247, 238, 0.94));
+      border: 1px solid rgba(29, 77, 63, 0.1);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel::before,
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .hero-panel::before {
+      width: 230px;
+      height: 230px;
+      background: radial-gradient(circle, rgba(216, 178, 91, 0.22), transparent 68%);
+      top: -90px;
+      right: -40px;
+    }
+
+    .hero-panel::after {
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(47, 122, 99, 0.18), transparent 72%);
+      bottom: -120px;
+      left: -70px;
+    }
+
+    .hero-art {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 18px;
+    }
+
+    .hero-character {
+      width: min(100%, 320px);
+      height: auto;
+      filter: drop-shadow(0 22px 34px rgba(29, 77, 63, 0.18));
+    }
+
+    .hero-pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      box-shadow: 0 12px 24px rgba(29, 77, 63, 0.08);
+      color: var(--pine-deep);
+      font-size: 0.96rem;
+      font-weight: 700;
+    }
+
+    .pill i { color: var(--sprout); }
+    .pill.money i { color: var(--gold); }
+    .pill.family i { color: var(--clay); }
+
+    .hero-note {
+      padding: 18px;
+      width: 100%;
+      border-radius: 22px;
+      background: rgba(245, 239, 226, 0.88);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: left;
+    }
+
+    .hero-note strong {
+      color: var(--pine-deep);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .spotlight {
+      padding: 12px 0 26px;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .spotlight-card {
+      padding: 20px 20px 18px;
+      border-radius: 24px;
+      background: rgba(255, 253, 247, 0.76);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      box-shadow: 0 18px 38px rgba(22, 57, 47, 0.08);
+    }
+
+    .spotlight-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--pine-deep);
+      margin-bottom: 8px;
+    }
+
+    .spotlight-card p {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .carousel-wrap {
+      padding: 34px 0 68px;
+      overflow: hidden;
+      position: relative;
+      max-width: 1180px;
+      margin: 0 auto;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 22px;
+      width: max-content;
+      animation: scroll-left 30s linear infinite;
+    }
+
+    .carousel-wrap:hover .carousel-track {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .carousel-track img {
+      width: 220px;
+      min-width: 220px;
+      height: auto;
+      border-radius: 28px;
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      box-shadow: 0 18px 44px rgba(0, 0, 0, 0.16);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: zoom-in;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .carousel-track img:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .section.soft {
+      background: linear-gradient(180deg, rgba(255, 253, 247, 0.72), rgba(245, 239, 226, 0.86));
+      border-top: 1px solid rgba(29, 77, 63, 0.06);
+      border-bottom: 1px solid rgba(29, 77, 63, 0.06);
+    }
+
+    .section-label {
+      display: block;
       text-align: center;
-      padding: 80px 24px 60px;
+      color: var(--sprout);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--pine-deep);
+      max-width: 12ch;
+      margin: 0 auto 14px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 1.04rem;
+      max-width: 640px;
+      margin: 0 auto 50px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: rgba(255, 253, 247, 0.8);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      border-radius: 26px;
+      padding: 26px 24px;
+      box-shadow: 0 18px 38px rgba(22, 57, 47, 0.08);
+    }
+
+    .feature-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(47, 122, 99, 0.14), rgba(216, 178, 91, 0.18));
+      color: var(--pine);
+      font-size: 1.25rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--pine-deep);
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .step {
+      padding: 26px 24px;
+      border-radius: 28px;
+      background: rgba(255, 253, 247, 0.82);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      box-shadow: 0 20px 44px rgba(22, 57, 47, 0.08);
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, var(--sprout), var(--pine));
+      color: #fff;
+      font-family: "Jost", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--pine-deep);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
       max-width: 760px;
       margin: 0 auto;
     }
-    .hero-character {
-      width: 240px;
-      height: auto;
-      margin: 0 auto 48px;
-      display: block;
+
+    .pricing-card {
+      position: relative;
+      padding: 30px 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      background: rgba(255, 253, 247, 0.8);
+      box-shadow: 0 22px 48px rgba(22, 57, 47, 0.08);
     }
-    .hero-badge {
-      display: inline-block;
-      background: #EEF2FF;
-      color: var(--purple);
-      font-weight: 700;
+
+    .pricing-card.featured {
+      background: linear-gradient(180deg, rgba(29, 77, 63, 0.98), rgba(22, 57, 47, 0.98));
+      color: #fdf8ef;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -12px;
+      left: 28px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #e6c57b, var(--gold));
+      color: #3f2f12;
       font-size: 0.8rem;
-      padding: 6px 16px;
-      border-radius: 50px;
-      margin-bottom: 24px;
-      letter-spacing: 0.05em;
+      font-weight: 800;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
     }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-      font-weight: 900;
-      line-height: 1.15;
-      margin-bottom: 20px;
-      color: var(--text);
+
+    .pricing-label {
+      font-size: 0.94rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: inherit;
+      opacity: 0.78;
     }
-    .hero h1 span { color: var(--purple); }
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--muted);
-      max-width: 540px;
-      margin: 0 auto 36px;
+
+    .price {
+      font-size: 2.8rem;
+      line-height: 0.95;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 8px;
     }
-    .hero-buttons {
+
+    .price span {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      opacity: 0.72;
+      margin-left: 4px;
+    }
+
+    .pricing-desc,
+    .pricing-trial {
+      font-size: 0.95rem;
+    }
+
+    .pricing-desc {
+      opacity: 0.72;
+      margin-bottom: 10px;
+    }
+
+    .pricing-trial {
+      color: var(--sprout);
+      font-weight: 700;
+    }
+
+    .pricing-card.featured .pricing-trial {
+      color: #f3d58b;
+    }
+
+    .cta-panel {
+      position: relative;
+      overflow: hidden;
+      padding: 48px 36px;
+      border-radius: 34px;
+      background:
+        radial-gradient(circle at top right, rgba(216, 178, 91, 0.2), transparent 30%),
+        linear-gradient(135deg, var(--pine) 0%, var(--pine-deep) 100%);
+      color: #fdf8ef;
+      box-shadow: var(--shadow-strong);
+      text-align: center;
+    }
+
+    .cta-panel h2 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+    }
+
+    .cta-panel p {
+      max-width: 620px;
+      margin: 0 auto 26px;
+      color: rgba(255, 248, 239, 0.82);
+      font-size: 1.06rem;
+    }
+
+    .cta-actions {
       display: flex;
       gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
     }
-    .btn-primary {
-      background: var(--purple);
-      color: #fff;
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .btn-primary:hover { opacity: 0.85; }
-    .btn-secondary {
-      background: #fff;
-      color: var(--purple);
-      padding: 14px 32px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      border: 2px solid var(--purple);
-      transition: background 0.2s;
-    }
-    .btn-secondary:hover { background: #EEF2FF; }
-    .hero-sub {
-      margin-top: 16px;
-      font-size: 0.85rem;
-      color: var(--muted);
+
+    .btn-light {
+      background: #fff8ef;
+      color: var(--pine-deep);
+      padding: 14px 24px;
     }
 
-    /* SCREENSHOTS CAROUSEL */
-    .carousel-wrap {
-      padding: 40px 0 60px;
-      overflow: hidden;
-      position: relative;
-      max-width: 1100px;
-      margin: 0 auto;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-      mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
-    }
-    .carousel-track {
-      display: flex;
-      gap: 20px;
-      width: max-content;
-      animation: scroll-left 30s linear infinite;
-    }
-    .carousel-wrap:hover .carousel-track {
-      animation-play-state: paused;
-    }
-    @keyframes scroll-left {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .carousel-track img {
-      width: 200px;
-      min-width: 200px;
-      height: auto;
-      border-radius: 24px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      cursor: zoom-in;
-    }
-    .carousel-track img:hover {
-      transform: scale(1.08);
-      box-shadow: 0 16px 56px rgba(0,0,0,0.28);
+    .btn-outline-light {
+      background: rgba(255, 248, 239, 0.08);
+      color: #fff8ef;
+      border-color: rgba(255, 248, 239, 0.18);
+      padding: 14px 24px;
     }
 
-    /* COMING SOON MODAL */
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9998;
-      background: rgba(0,0,0,0.6);
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: #fff;
-      border-radius: 24px;
-      padding: 40px 36px;
-      max-width: 460px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
-    }
-    .modal-close {
-      position: absolute;
-      top: 16px;
-      right: 20px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--muted);
-      line-height: 1;
-    }
-    .modal-close:hover { color: var(--text); }
-    .modal-icon { font-size: 3rem; margin-bottom: 16px; }
-    .modal h2 { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; }
-    .modal p { color: var(--muted); margin-bottom: 24px; font-size: 0.95rem; }
-    .modal-notify {
-      display: inline-block;
-      background: var(--purple);
-      color: #fff;
-      padding: 13px 28px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      text-decoration: none;
-      transition: opacity 0.2s;
-    }
-    .modal-notify:hover { opacity: 0.85; }
-    .modal-sub { margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
-
-    /* MAILERLITE EMBED (THEMED) */
-    #mlb2-38567556.ml-form-embedContainer {
-      width: 100%;
-      margin: 0;
-    }
-    #mlb2-38567556 .ml-form-embedWrapper {
-      background: transparent;
-      width: 100%;
-    }
-    #mlb2-38567556 .ml-form-embedBody {
-      padding: 0;
-    }
-    #mlb2-38567556 .ml-form-formContent {
-      margin-bottom: 12px;
-    }
-    #mlb2-38567556 .ml-field-group input[type="email"] {
-      width: 100%;
-      border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 0.95rem;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    #mlb2-38567556 .ml-field-group input[type="email"]:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 4px rgba(108,99,255,0.12);
-    }
-    #mlb2-38567556 .ml-form-embedSubmit {
-      width: 100%;
-    }
-    #mlb2-38567556 .ml-form-embedSubmit button.primary {
-      width: 100%;
-      background: var(--purple);
-      color: #fff;
-      padding: 13px 28px;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: 0;
-      cursor: pointer;
-      transition: opacity 0.2s;
-    }
-    #mlb2-38567556 .ml-form-embedSubmit button.primary:hover {
-      opacity: 0.85;
-    }
-    #mlb2-38567556 .ml-form-successContent h4 {
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-    #mlb2-38567556 .ml-form-successContent p {
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    /* BETA CHECKBOX */
-    .beta-checkbox-wrap {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin: 12px 0 16px;
-      text-align: left;
-      cursor: pointer;
-    }
-    .beta-checkbox-wrap input[type="checkbox"] {
-      appearance: none;
-      -webkit-appearance: none;
-      width: 20px;
-      min-width: 20px;
-      height: 20px;
-      border: 2px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      position: relative;
-      transition: border-color 0.2s, background 0.2s;
-      margin-top: 1px;
-    }
-    .beta-checkbox-wrap input[type="checkbox"]:checked {
-      background: var(--purple);
-      border-color: var(--purple);
-    }
-    .beta-checkbox-wrap input[type="checkbox"]:checked::after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 2px;
-      width: 6px;
-      height: 10px;
-      border: 2px solid #fff;
-      border-top: none;
-      border-left: none;
-      transform: rotate(45deg);
-    }
-    .beta-checkbox-label {
-      font-size: 0.88rem;
-      color: var(--text);
-      line-height: 1.45;
-    }
-    .beta-checkbox-label strong {
-      color: var(--purple);
-    }
-
-    /* SOCIAL ICONS */
-    .social-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 16px; }
-    .social-links a { color: rgba(255,255,255,0.6); font-size: 1.3rem; transition: color 0.2s; }
-    .social-links a:hover { color: #fff; }
-
-    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed;
       inset: 0;
       z-index: 9999;
-      background: rgba(0,0,0,0.85);
+      background: rgba(15, 25, 21, 0.9);
       align-items: center;
       justify-content: center;
       cursor: zoom-out;
+      padding: 24px;
     }
+
     .lightbox.open { display: flex; }
+
     .lightbox img {
       max-height: 90vh;
       max-width: 90vw;
-      border-radius: 20px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      border-radius: 24px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
     }
+
     .lightbox-close {
       position: absolute;
       top: 20px;
@@ -361,497 +642,363 @@
       font-size: 2rem;
       cursor: pointer;
       line-height: 1;
-      opacity: 0.8;
+      opacity: 0.82;
     }
+
     .lightbox-close:hover { opacity: 1; }
 
-    /* FEATURES */
-    .features {
-      background: #fff;
-      padding: 72px 24px;
-    }
-    .section-label {
-      text-align: center;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--purple);
-      margin-bottom: 12px;
-    }
-    .section-title {
-      text-align: center;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-    .section-sub {
+    footer {
+      padding: 34px 0 48px;
       text-align: center;
       color: var(--muted);
-      font-size: 1.05rem;
-      max-width: 520px;
-      margin: 0 auto 52px;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .feature-card {
-      background: var(--bg);
-      border-radius: 20px;
-      padding: 28px 24px;
-    }
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 14px;
-    }
-    .feature-card h3 {
-      font-size: 1rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-    .feature-card p {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.6;
     }
 
-    /* HOW IT WORKS */
-    .how {
-      padding: 72px 24px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .steps {
+    .social-links {
       display: flex;
-      flex-direction: column;
-      gap: 32px;
-      margin-top: 48px;
-    }
-    .step {
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-    .step-num {
-      width: 44px;
-      min-width: 44px;
-      height: 44px;
-      background: var(--purple);
-      color: #fff;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
+      gap: 18px;
       justify-content: center;
-      font-weight: 900;
-      font-size: 1.1rem;
-    }
-    .step-content h3 {
-      font-weight: 800;
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-    }
-    .step-content p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    /* PRICING */
-    .pricing {
-      background: #fff;
-      padding: 72px 24px;
-    }
-    .pricing-cards {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 700px;
-      margin: 48px auto 0;
-    }
-    .pricing-card {
-      background: var(--bg);
-      border-radius: 24px;
-      padding: 32px 28px;
-      flex: 1;
-      min-width: 240px;
-      max-width: 300px;
-      position: relative;
-    }
-    .pricing-card.featured {
-      background: var(--purple);
-      color: #fff;
-    }
-    .pricing-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--yellow);
-      color: var(--text);
-      font-size: 0.75rem;
-      font-weight: 800;
-      padding: 4px 14px;
-      border-radius: 50px;
-      white-space: nowrap;
-    }
-    .pricing-label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      opacity: 0.7;
-      margin-bottom: 8px;
-    }
-    .pricing-price {
-      font-size: 2.4rem;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .pricing-price span {
-      font-size: 1rem;
-      font-weight: 600;
-      opacity: 0.7;
-    }
-    .pricing-desc {
-      font-size: 0.85rem;
-      opacity: 0.7;
-      margin-bottom: 20px;
-    }
-    .pricing-trial {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--teal);
-    }
-    .pricing-card.featured .pricing-trial { color: var(--yellow); }
-
-    /* CTA */
-    .cta {
-      text-align: center;
-      padding: 80px 24px;
-      background: linear-gradient(135deg, var(--purple) 0%, #9B59B6 100%);
-      color: #fff;
-    }
-    .cta h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 900;
       margin-bottom: 16px;
     }
-    .cta p {
-      font-size: 1.1rem;
-      opacity: 0.85;
-      margin-bottom: 36px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .btn-white {
-      background: #fff;
-      color: var(--purple);
-      padding: 14px 36px;
-      border-radius: 50px;
-      font-weight: 800;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: opacity 0.2s;
-    }
-    .btn-white:hover { opacity: 0.9; }
 
-    /* FOOTER */
-    footer {
-      background: var(--text);
-      color: #fff;
-      padding: 32px 24px;
-      text-align: center;
-      font-size: 0.85rem;
-    }
-    footer a {
-      color: rgba(255,255,255,0.6);
+    .social-links a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 253, 247, 0.82);
+      border: 1px solid rgba(29, 77, 63, 0.08);
+      color: var(--pine);
       text-decoration: none;
-      margin: 0 12px;
+      box-shadow: 0 14px 28px rgba(22, 57, 47, 0.08);
+      transition: transform 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     }
-    footer a:hover { color: #fff; }
-    .footer-links { margin-bottom: 12px; }
-    .footer-copy { color: rgba(255,255,255,0.4); }
 
-    @media (max-width: 600px) {
-      nav { padding: 12px 16px; }
-      .hero { padding: 56px 20px 40px; }
-      .step { flex-direction: column; }
+    .social-links a:hover {
+      transform: translateY(-2px);
+      color: var(--pine-deep);
+      border-color: rgba(29, 77, 63, 0.18);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: var(--pine);
+    }
+
+    .footer-copy {
+      color: rgba(95, 112, 104, 0.8);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .steps,
+      .spotlight-grid,
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1,
+      .section-title {
+        max-width: none;
+      }
+
+      .hero-panel {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell,
+      .nav-inner {
+        width: min(100% - 24px, 1180px);
+      }
+
+      nav { position: static; }
+
+      .nav-inner {
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links {
+        width: 100%;
+      }
+
+      .nav-links .btn {
+        flex: 1 1 0;
+        min-width: 0;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero-actions,
+      .cta-actions {
+        flex-direction: column;
+      }
+
+      .hero-actions .btn,
+      .cta-actions .btn {
+        width: 100%;
+      }
+
+      .hero-panel,
+      .cta-panel,
+      .feature-card,
+      .step,
+      .pricing-card,
+      .spotlight-card {
+        border-radius: 24px;
+      }
+
+      .carousel-track img {
+        width: 182px;
+        min-width: 182px;
+      }
     }
   </style>
 </head>
 <body>
-
-  <!-- NAV -->
   <nav>
-    <a href="/" class="nav-logo">
-      <img src="gemsproutpadded.png" alt="GemSprout">
-      GemSprout
-    </a>
-    <a href="#" class="nav-cta" onclick="openModal();return false;">Download</a>
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="gemsproutpadded.png" alt="GemSprout">
+        GemSprout
+      </a>
+      <div class="nav-links">
+        <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="btn btn-secondary">Download on the App Store</a>
+        <a href="/beta/" class="btn btn-primary">Join the Beta List</a>
+      </div>
+    </div>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <img src="gemsproutpadded.png" alt="GemSprout" class="hero-character">
-    <div class="hero-badge">Coming Soon on iOS</div>
-    <h1>Chores that feel like a <span>game</span></h1>
-    <p>Kids earn gems, level up, hit streaks, and unlock rewards they actually want. Finally, a chore app kids will ask to use.</p>
-    <div class="hero-buttons">
-      <a href="#" class="btn-primary" onclick="openModal();return false;">Download on the App Store</a>
-      <a href="#why" class="btn-secondary">Learn More</a>
-    </div>
-    <p class="hero-sub">Free 7-day trial. No credit card required.</p>
-  </section>
-
-  <!-- SCREENSHOTS CAROUSEL -->
-  <div class="carousel-wrap">
-    <div class="carousel-track">
-      <img src="screenshots/01-hero-iphone-1320x2868.png" alt="GemSprout makes chores fun">
-      <img src="screenshots/02-earn-iphone-1320x2868.png" alt="Do chores, earn gems">
-      <img src="screenshots/03-rewards-iphone-1320x2868.png" alt="Prizes kids choose themselves">
-      <img src="screenshots/04-parent-iphone-1320x2868.png" alt="Always know who's winning">
-      <img src="screenshots/05-team-iphone-1320x2868.png" alt="Work toward something big, together">
-      <img src="screenshots/06-more-iphone-1320x2868.png" alt="Every win, tracked">
-      <!-- Duplicated for seamless loop -->
-      <img src="screenshots/01-hero-iphone-1320x2868.png" alt="GemSprout makes chores fun">
-      <img src="screenshots/02-earn-iphone-1320x2868.png" alt="Do chores, earn gems">
-      <img src="screenshots/03-rewards-iphone-1320x2868.png" alt="Prizes kids choose themselves">
-      <img src="screenshots/04-parent-iphone-1320x2868.png" alt="Always know who's winning">
-      <img src="screenshots/05-team-iphone-1320x2868.png" alt="Work toward something big, together">
-      <img src="screenshots/06-more-iphone-1320x2868.png" alt="Every win, tracked">
-    </div>
-  </div>
-
-  <!-- FEATURES -->
-  <section class="features" id="why">
-    <p class="section-label">Why GemSprout</p>
-    <h2 class="section-title">Built to actually work</h2>
-    <p class="section-sub">We made chores feel like a game — and that changes everything.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon">💎</div>
-        <h3>Earn Gems</h3>
-        <p>Kids earn gems for every completed chore. Set custom values so bigger jobs pay more.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">⚡</div>
-        <h3>Streaks & Combos</h3>
-        <p>Keep the momentum going with streak bonuses and combo rewards for back-to-back chores.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🏆</div>
-        <h3>Levels & Badges</h3>
-        <p>Kids level up as they grow, unlocking badges that show off their hard work.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">🎁</div>
-        <h3>Real Rewards</h3>
-        <p>Create a custom prize list. Kids save up and cash in gems for rewards that matter to them.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">📸</div>
-        <h3>Photo Verification</h3>
-        <p>Kids snap before and after photos so parents can see the proof before approving.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon">💰</div>
-        <h3>Savings Goals</h3>
-        <p>Teach real money skills with savings goals, parent matching, and interest on saved gems.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section class="how">
-    <p class="section-label">Getting Started</p>
-    <h2 class="section-title">Up and running in minutes</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-content">
-          <h3>Set up your family</h3>
-          <p>Add your kids, pick their avatars, and create a chore list that fits your routine.</p>
+  <main>
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Now on iPhone</div>
+          <h1>Gentle motivation for family rhythms.</h1>
+          <p>GemSprout helps kids follow through, feel proud, and grow toward rewards and savings goals in a way that feels calm, warm, and actually sustainable for real families.</p>
+          <div class="hero-actions">
+            <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="btn btn-primary"><i class="fa-brands fa-apple"></i> Download on the App Store</a>
+            <a href="#screens" class="btn btn-secondary">See the app</a>
+          </div>
+          <p class="hero-sub"><strong>Warm by design.</strong> Rewards, savings, routines, celebrations, and shared goals without the loud, chaotic kid-app energy.</p>
         </div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-content">
-          <h3>Share your family code</h3>
-          <p>One code connects everyone. Share it with your partner and every device stays in sync automatically.</p>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-content">
-          <h3>Watch them get to work</h3>
-          <p>Kids check off chores, earn gems, and race toward rewards. No more reminders needed.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section class="pricing">
-    <p class="section-label">Pricing</p>
-    <h2 class="section-title">Simple, fair pricing</h2>
-    <p class="section-sub">Try free for 7 days. Cancel anytime.</p>
-    <div class="pricing-cards">
-      <div class="pricing-card">
-        <div class="pricing-label">Monthly</div>
-        <div class="pricing-price">$2.99<span>/mo</span></div>
-        <div class="pricing-desc">Billed monthly</div>
-        <div class="pricing-trial">7-day free trial</div>
-      </div>
-      <div class="pricing-card featured">
-        <div class="pricing-badge">Best Value</div>
-        <div class="pricing-label">Annual</div>
-        <div class="pricing-price">$24.99<span>/yr</span></div>
-        <div class="pricing-desc">Save 30% vs monthly</div>
-        <div class="pricing-trial">7-day free trial</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <h2>Ready to make chores fun?</h2>
-    <p>Join families who've turned the daily chore battle into something kids actually look forward to.</p>
-    <a href="#" class="btn-white" onclick="openModal();return false;">Download GemSprout Free</a>
-  </section>
-
-  <!-- COMING SOON MODAL -->
-  <div class="modal-overlay" id="coming-soon-modal">
-    <div class="modal">
-      <span class="modal-close" onclick="closeModal()">&times;</span>
-      <div class="modal-icon">🌱</div>
-      <h2>Coming Soon!</h2>
-      <p>GemSprout is launching on the App Store soon. Sign up to be notified the moment it's live.</p>
-      <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
-        <div class="ml-form-align-center">
-          <div class="ml-form-embedWrapper embedForm">
-            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
-              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/subscribe" data-code="" method="post" target="_blank">
-                <div class="ml-form-formContent">
-                  <div class="ml-form-fieldRow ml-last-item">
-                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Enter your email" autocomplete="email">
-                    </div>
-                  </div>
-                </div>
-                <label class="beta-checkbox-wrap">
-                  <input type="checkbox" id="beta-opt-in">
-                  <span class="beta-checkbox-label">
-                    <strong>Interested in future beta testing?</strong><br>
-                    Sign me up to be considered for future test builds.
-                  </span>
-                </label>
-                <div id="platform-selector" style="display:none;margin:-4px 0 16px;padding:12px 14px;background:#EEF2FF;border-radius:12px;">
-                  <p style="font-size:0.82rem;font-weight:700;color:var(--purple);margin-bottom:8px;">Which platform?</p>
-                  <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer;margin-bottom:6px">
-                    <input type="radio" name="beta_platform" value="iOS" checked> iOS (iPhone / iPad)
-                  </label>
-                  <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;cursor:pointer">
-                    <input type="radio" name="beta_platform" value="Android"> Android
-                  </label>
-                </div>
-                <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field" value="No">
-                <input type="hidden" name="fields[platform]" id="platform-hidden-field" value="">
-                <input type="hidden" name="ml-submit" value="1">
-                <div class="ml-form-embedSubmit">
-                  <button type="submit" class="primary">Notify Me at Launch</button>
-                </div>
-                <input type="hidden" name="anticsrf" value="true">
-              </form>
+        <div class="hero-panel">
+          <div class="hero-art">
+            <img src="gemsproutpadded.png" alt="GemSprout icon" class="hero-character">
+            <div class="hero-pills">
+              <span class="pill"><i class="fa-solid fa-seedling"></i> Family rhythms</span>
+              <span class="pill money"><i class="fa-solid fa-piggy-bank"></i> Savings goals</span>
+              <span class="pill family"><i class="fa-solid fa-people-group"></i> Shared wins</span>
             </div>
-            <div class="ml-form-successBody row-success" style="display: none">
-              <div class="ml-form-successContent">
-                <h4 id="success-heading">You're on the list!</h4>
-                <p id="success-msg">Thanks — we'll email you as soon as GemSprout launches.</p>
-              </div>
+            <div class="hero-note">
+              <strong>Designed for real homes, not idealized ones.</strong>
+              Build routines, reward follow-through, celebrate progress, and keep everyone connected with one family code.
             </div>
           </div>
         </div>
       </div>
-      <p class="modal-sub">No spam. Just one email when we launch.</p>
-    </div>
-  </div>
+    </section>
 
-  <!-- LIGHTBOX -->
+    <section class="spotlight">
+      <div class="shell spotlight-grid">
+        <div class="spotlight-card">
+          <h3>Kids stay in their own lane</h3>
+          <p>A focused kid mode keeps the experience clear, encouraging, and visually theirs.</p>
+        </div>
+        <div class="spotlight-card">
+          <h3>Parents stay in control</h3>
+          <p>Approve tasks, manage savings, handle rewards, and keep the whole household in sync.</p>
+        </div>
+        <div class="spotlight-card">
+          <h3>Progress feels meaningful</h3>
+          <p>Gems, celebrations, streaks, savings, and weekly recaps all work together to reinforce momentum.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="carousel-wrap" id="screens">
+      <div class="carousel-track">
+        <img src="screenshots/01-hero-iphone-1320x2868.png" alt="GemSprout home screen">
+        <img src="screenshots/02-earn-iphone-1320x2868.png" alt="GemSprout kid routines and gems">
+        <img src="screenshots/03-rewards-iphone-1320x2868.png" alt="GemSprout rewards and savings">
+        <img src="screenshots/04-parent-iphone-1320x2868.png" alt="GemSprout parent dashboard">
+        <img src="screenshots/05-team-iphone-1320x2868.png" alt="GemSprout family goals">
+        <img src="screenshots/06-more-iphone-1320x2868.png" alt="GemSprout celebrations and progress">
+        <img src="screenshots/01-hero-iphone-1320x2868.png" alt="GemSprout home screen">
+        <img src="screenshots/02-earn-iphone-1320x2868.png" alt="GemSprout kid routines and gems">
+        <img src="screenshots/03-rewards-iphone-1320x2868.png" alt="GemSprout rewards and savings">
+        <img src="screenshots/04-parent-iphone-1320x2868.png" alt="GemSprout parent dashboard">
+        <img src="screenshots/05-team-iphone-1320x2868.png" alt="GemSprout family goals">
+        <img src="screenshots/06-more-iphone-1320x2868.png" alt="GemSprout celebrations and progress">
+      </div>
+    </div>
+
+    <section class="section soft" id="why">
+      <div class="shell">
+        <p class="section-label">Why GemSprout</p>
+        <h2 class="section-title">A family system that feels lighter, not louder.</h2>
+        <p class="section-sub">GemSprout turns chores, routines, and rewards into a more encouraging rhythm without making your home feel like a scoreboard.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-gem"></i></div>
+            <h3>Rewards that feel tangible</h3>
+            <p>Kids earn gems for follow-through, save toward goals, and cash in for rewards that actually matter to them.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-list-check"></i></div>
+            <h3>Rhythms that make sense</h3>
+            <p>Build repeating routines and one-off tasks that fit your real week instead of fighting it.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-piggy-bank"></i></div>
+            <h3>Savings with real-life lessons</h3>
+            <p>Use deposits, matching, and savings goals to make money habits feel concrete and motivating.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+            <h3>Celebrations that reinforce growth</h3>
+            <p>Streaks, badges, recaps, and little moments of delight help progress feel visible without becoming overwhelming.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-camera"></i></div>
+            <h3>Accountability without hovering</h3>
+            <p>Photo check-ins and approvals give parents visibility without requiring constant micromanaging.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-people-group"></i></div>
+            <h3>One family, one shared system</h3>
+            <p>Family codes make it easy to connect devices, keep everyone synced, and support multiple adults and kids together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <p class="section-label">How It Works</p>
+        <h2 class="section-title">Set it up once, then let it grow with your family.</h2>
+        <p class="section-sub">GemSprout is quick to get started with, but flexible enough to become part of your everyday family rhythm.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Create your family rhythm</h3>
+            <p>Add family members, set up chores and routines, and personalize each kid’s profile so the app feels like theirs.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Connect everyone with one code</h3>
+            <p>Share your family code across devices so parents and kids stay on the same page without extra setup headaches.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>Celebrate progress as it happens</h3>
+            <p>Approve completions, award gems, manage rewards and savings, and enjoy the weekly recap together.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section soft">
+      <div class="shell">
+        <p class="section-label">Pricing</p>
+        <h2 class="section-title">Simple pricing for the whole household.</h2>
+        <p class="section-sub">No tiers, no family-member limits, no complicated unlocks. Just one subscription for your home.</p>
+        <div class="pricing-grid">
+          <div class="pricing-card">
+            <div class="pricing-label">Monthly</div>
+            <div class="price">$2.99<span>/mo</span></div>
+            <div class="pricing-desc">Billed monthly</div>
+            <div class="pricing-trial">7-day free trial</div>
+          </div>
+          <div class="pricing-card featured">
+            <div class="pricing-badge">Best Value</div>
+            <div class="pricing-label">Annual</div>
+            <div class="price">$24.99<span>/yr</span></div>
+            <div class="pricing-desc">Save more over the year</div>
+            <div class="pricing-trial">7-day free trial</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="cta-panel">
+          <h2>Ready to make your family rhythm feel steadier?</h2>
+          <p>Download GemSprout on iPhone, or join the beta list if you want a heads-up about future test builds and new platform availability.</p>
+          <div class="cta-actions">
+            <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="btn btn-light"><i class="fa-brands fa-apple"></i> Download on the App Store</a>
+            <a href="/beta/" class="btn btn-outline-light">Join the Beta List</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
   <div class="lightbox" id="lightbox">
     <span class="lightbox-close" id="lightbox-close">&times;</span>
     <img id="lightbox-img" src="" alt="Screenshot">
   </div>
 
-  <!-- FOOTER -->
   <footer>
-    <div class="social-links">
-      <a href="https://instagram.com/gemsproutapp" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://x.com/gemsprout" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://tiktok.com/@gemsproutapp" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+    <div class="shell">
+      <div class="social-links">
+        <a href="https://instagram.com/gemsproutapp" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://x.com/gemsprout" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://tiktok.com/@gemsproutapp" target="_blank" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/support.html">Support</a>
+      </div>
+      <div class="footer-copy">&copy; 2026 GemSprout. All rights reserved.</div>
     </div>
-    <div class="footer-links">
-      <a href="/privacy.html">Privacy Policy</a>
-      <a href="/terms.html">Terms of Service</a>
-      <a href="/support.html">Support</a>
-    </div>
-    <div class="footer-copy">&copy; 2026 GemSprout. All rights reserved.</div>
   </footer>
 
   <script>
-    function openModal() { document.getElementById('coming-soon-modal').classList.add('open'); }
-    function closeModal() { document.getElementById('coming-soon-modal').classList.remove('open'); }
-    document.getElementById('coming-soon-modal').addEventListener('click', e => { if (e.target === document.getElementById('coming-soon-modal')) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
     document.querySelectorAll('.carousel-track img').forEach(img => {
       img.addEventListener('click', () => {
         lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
         lightbox.classList.add('open');
       });
     });
 
-    document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) lightbox.classList.remove('open'); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
-  </script>
-
-  <script>
-    document.getElementById('beta-opt-in').addEventListener('change', function() {
-      document.getElementById('beta-hidden-field').value = this.checked ? 'Yes' : 'No';
-      document.getElementById('platform-selector').style.display = this.checked ? 'block' : 'none';
-      document.getElementById('platform-hidden-field').value = this.checked
-        ? (document.querySelector('input[name="beta_platform"]:checked')?.value || 'iOS')
-        : '';
+    document.getElementById('lightbox-close').addEventListener('click', () => {
+      lightbox.classList.remove('open');
     });
 
-    document.querySelectorAll('input[name="beta_platform"]').forEach(r => {
-      r.addEventListener('change', function() {
-        document.getElementById('platform-hidden-field').value = this.value;
-      });
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) lightbox.classList.remove('open');
     });
 
-    function ml_webform_success_38567556() {
-      var $ = window.ml_jQuery || window.jQuery;
-      if (!$) return;
-      if (document.getElementById('beta-opt-in').checked) {
-        document.getElementById('success-heading').textContent = "You're on the list!";
-        document.getElementById('success-msg').textContent = "Thanks — we'll reach out when a future beta opens up.";
-      }
-      $('.ml-subscribe-form-38567556 .row-success').show();
-      $('.ml-subscribe-form-38567556 .row-form').hide();
-    }
-  </script>
-  <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v95037e5bac78f29ed026832ca21a7c7b" type="text/javascript"></script>
-  <script>
-    fetch('https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/takel');
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+    });
   </script>
 </body>
 </html>

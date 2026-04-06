@@ -5,76 +5,130 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GemSprout Beta</title>
   <link rel="icon" type="image/png" href="https://gemsprout.com/gemsproutpadded.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --purple: #6C63FF;
-      --border: #E5E7EB;
-      --text:   #2D3047;
-      --muted:  #6B7280;
+      --pine: #1d4d3f;
+      --pine-deep: #16392f;
+      --sprout: #2f7a63;
+      --cream: #f7f1e5;
+      --gold: #d8b25b;
+      --ink: #20322b;
+      --muted: #607168;
+      --border: rgba(32, 50, 43, 0.1);
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(145deg, #667eea, #764ba2);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
       min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(216, 178, 91, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(47, 122, 99, 0.14), transparent 34%),
+        linear-gradient(180deg, #f6efdf 0%, #fbf8f1 100%);
+      color: var(--ink);
+      padding: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
     }
+    h1, .status, .back-link {
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    .wrap {
+      width: min(100%, 460px);
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--pine);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .back-link:hover { color: var(--pine-deep); }
     .card {
-      background: #fff;
-      border-radius: 24px;
-      padding: 40px 32px;
-      max-width: 420px;
-      width: 100%;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+      background: rgba(255, 253, 247, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 36px 30px 30px;
+      box-shadow: 0 28px 80px rgba(22, 57, 47, 0.12);
       text-align: center;
+      backdrop-filter: blur(12px);
     }
     .card img {
-      width: 80px;
-      height: 80px;
-      border-radius: 18px;
-      margin-bottom: 16px;
+      width: 84px;
+      height: 84px;
+      border-radius: 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 16px 30px rgba(29, 77, 63, 0.14);
     }
-    .card h1 {
-      font-size: 1.5rem;
-      font-weight: 900;
-      color: var(--text);
+    h1 {
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      color: var(--pine-deep);
       margin-bottom: 10px;
     }
-    .card .status {
-      display: inline-block;
-      background: #FEF3C7;
-      color: #92400E;
-      font-size: 0.78rem;
+    .status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      background: rgba(216, 178, 91, 0.18);
+      color: #6d4d16;
+      font-size: 0.84rem;
       font-weight: 700;
-      padding: 4px 14px;
-      border-radius: 50px;
-      margin-bottom: 16px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
-    .card p {
-      font-size: 0.92rem;
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .lead {
+      font-size: 0.97rem;
       color: var(--muted);
-      line-height: 1.6;
-      margin-bottom: 28px;
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .app-store-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--sprout), var(--pine));
+      color: #fff;
+      text-decoration: none;
+      font-family: "Jost", sans-serif;
+      font-weight: 700;
+      box-shadow: 0 16px 34px rgba(29, 77, 63, 0.2);
+      margin-bottom: 24px;
     }
     .divider {
       height: 1px;
       background: var(--border);
       margin: 0 0 24px;
     }
-    .form-label {
-      font-size: 0.88rem;
+    .section-title {
+      font-family: "Jost", sans-serif;
+      font-size: 0.98rem;
       font-weight: 700;
-      color: var(--text);
-      margin-bottom: 16px;
-      display: block;
+      color: var(--pine-deep);
       text-align: left;
+      margin-bottom: 14px;
     }
-    /* MailerLite overrides */
     #mlb2-38567556.ml-form-embedContainer { width: 100%; margin: 0; }
     #mlb2-38567556 .ml-form-embedWrapper { background: transparent; width: 100%; }
     #mlb2-38567556 .ml-form-embedBody { padding: 0; }
@@ -82,33 +136,41 @@
     #mlb2-38567556 .ml-field-group input[type="email"] {
       width: 100%;
       border: 2px solid var(--border);
-      border-radius: 14px;
-      padding: 12px 14px;
+      border-radius: 16px;
+      padding: 13px 14px;
       font-size: 0.95rem;
-      color: var(--text);
+      color: var(--ink);
       outline: none;
       transition: border-color 0.2s, box-shadow 0.2s;
+      background: rgba(255, 255, 255, 0.8);
     }
     #mlb2-38567556 .ml-field-group input[type="email"]:focus {
-      border-color: var(--purple);
-      box-shadow: 0 0 0 4px rgba(108,99,255,0.12);
+      border-color: var(--sprout);
+      box-shadow: 0 0 0 4px rgba(47, 122, 99, 0.12);
     }
     #mlb2-38567556 .ml-form-embedSubmit { width: 100%; }
     #mlb2-38567556 .ml-form-embedSubmit button.primary {
       width: 100%;
-      background: var(--purple);
+      background: linear-gradient(135deg, var(--sprout), var(--pine));
       color: #fff;
-      padding: 13px 28px;
-      border-radius: 50px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-family: "Jost", sans-serif;
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.96rem;
       border: 0;
       cursor: pointer;
-      transition: opacity 0.2s;
     }
-    #mlb2-38567556 .ml-form-embedSubmit button.primary:hover { opacity: 0.85; }
-    #mlb2-38567556 .ml-form-successContent h4 { font-size: 1.1rem; margin-bottom: 6px; color: var(--text); }
-    #mlb2-38567556 .ml-form-successContent p { color: var(--muted); font-size: 0.9rem; }
+    #mlb2-38567556 .ml-form-successContent h4 {
+      font-family: "Jost", sans-serif;
+      font-size: 1.15rem;
+      margin-bottom: 6px;
+      color: var(--pine-deep);
+    }
+    #mlb2-38567556 .ml-form-successContent p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
     .beta-checkbox-wrap {
       display: flex;
       align-items: flex-start;
@@ -129,13 +191,14 @@
       position: relative;
       transition: border-color 0.2s, background 0.2s;
       margin-top: 1px;
+      background: rgba(255, 255, 255, 0.82);
     }
     .beta-checkbox-wrap input[type="checkbox"]:checked {
-      background: var(--purple);
-      border-color: var(--purple);
+      background: var(--sprout);
+      border-color: var(--sprout);
     }
     .beta-checkbox-wrap input[type="checkbox"]:checked::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 5px;
       top: 2px;
@@ -147,114 +210,106 @@
       transform: rotate(45deg);
     }
     .beta-checkbox-label {
-      font-size: 0.88rem;
-      color: var(--text);
+      font-size: 0.9rem;
+      color: var(--ink);
       line-height: 1.45;
     }
-    .beta-checkbox-label strong { color: var(--purple); }
+    .beta-checkbox-label strong { color: var(--pine-deep); }
     .platform-selector {
       display: none;
       margin: -4px 0 16px;
       padding: 12px 14px;
-      background: #EEF2FF;
-      border-radius: 12px;
+      background: rgba(47, 122, 99, 0.08);
+      border-radius: 14px;
       text-align: left;
     }
     .platform-selector p {
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 700;
-      color: var(--purple);
+      color: var(--pine);
       margin-bottom: 8px;
     }
     .platform-selector label {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       cursor: pointer;
       margin-bottom: 6px;
-      color: var(--text);
+      color: var(--ink);
     }
-    .modal-sub { margin-top: 14px; font-size: 0.8rem; color: var(--muted); }
-    .app-store-link {
-      display: inline-block;
-      margin-top: 8px;
-      font-size: 0.88rem;
-      color: var(--purple);
-      font-weight: 700;
-      text-decoration: none;
+    .modal-sub {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: var(--muted);
     }
-    .app-store-link:hover { text-decoration: underline; }
-    .back-link {
-      display: block;
-      text-align: left;
-      color: rgba(255,255,255,0.85);
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
-      margin-bottom: 14px;
-      max-width: 420px;
-      width: 100%;
+    @media (max-width: 520px) {
+      body { padding: 16px; }
+      .card {
+        padding: 30px 20px 24px;
+        border-radius: 24px;
+      }
     }
-    .back-link:hover { color: #fff; }
   </style>
 </head>
 <body>
-  <a href="/" class="back-link">← Return to GemSprout</a>
-  <div class="card">
-    <img src="https://gemsprout.com/gemsproutpadded.png" alt="GemSprout">
-    <h1>GemSprout Beta</h1>
-    <span class="status">Beta Testing Closed</span>
-    <p>Beta testing is not currently open. GemSprout is available on the App Store — or sign up below to be considered for future test builds.</p>
-    <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="app-store-link">Download on the App Store →</a>
-    <div class="divider" style="margin-top:24px;"></div>
-    <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
-      <div class="ml-form-align-center">
-        <div class="ml-form-embedWrapper embedForm">
-          <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
-            <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/subscribe" data-code="" method="post" target="_blank">
-              <div class="ml-form-formContent">
-                <div class="ml-form-fieldRow ml-last-item">
-                  <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                    <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Enter your email" autocomplete="email">
+  <div class="wrap">
+    <a href="/" class="back-link">← Return to GemSprout</a>
+    <div class="card">
+      <img src="https://gemsprout.com/gemsproutpadded.png" alt="GemSprout">
+      <h1>GemSprout Beta</h1>
+      <span class="status">Beta Testing Closed</span>
+      <p class="lead">Beta testing is not currently open. GemSprout is available on the App Store now, and you can still sign up below if you want to hear about future beta builds or new platform availability.</p>
+      <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="app-store-link">Download on the App Store</a>
+      <div class="divider"></div>
+      <div class="section-title">Join the future beta list</div>
+      <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
+        <div class="ml-form-align-center">
+          <div class="ml-form-embedWrapper embedForm">
+            <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+              <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2197372/forms/182154865405855621/subscribe" data-code="" method="post" target="_blank">
+                <div class="ml-form-formContent">
+                  <div class="ml-form-fieldRow ml-last-item">
+                    <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="Enter your email" autocomplete="email">
+                    </div>
                   </div>
                 </div>
+                <label class="beta-checkbox-wrap">
+                  <input type="checkbox" id="beta-opt-in-beta" checked>
+                  <span class="beta-checkbox-label">
+                    <strong>Interested in future beta testing?</strong><br>
+                    Sign me up to be considered for future test builds.
+                  </span>
+                </label>
+                <div class="platform-selector" id="platform-selector-beta">
+                  <p>Which platform?</p>
+                  <label><input type="radio" name="beta_platform_b" value="iOS" checked> iOS (iPhone / iPad)</label>
+                  <label><input type="radio" name="beta_platform_b" value="Android"> Android</label>
+                </div>
+                <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field-beta" value="Yes">
+                <input type="hidden" name="fields[platform]" id="platform-hidden-field-beta" value="iOS">
+                <input type="hidden" name="ml-submit" value="1">
+                <div class="ml-form-embedSubmit">
+                  <button type="submit" class="primary">Notify Me About Future Betas</button>
+                </div>
+                <input type="hidden" name="anticsrf" value="true">
+              </form>
+            </div>
+            <div class="ml-form-successBody row-success" style="display:none">
+              <div class="ml-form-successContent">
+                <h4 id="beta-success-heading">You're on the list!</h4>
+                <p id="beta-success-msg">Thanks - we'll reach out when a future beta opens up.</p>
               </div>
-              <label class="beta-checkbox-wrap">
-                <input type="checkbox" id="beta-opt-in-beta" checked>
-                <span class="beta-checkbox-label">
-                  <strong>Interested in future beta testing?</strong><br>
-                  Sign me up to be considered for future test builds.
-                </span>
-              </label>
-              <div class="platform-selector" id="platform-selector-beta">
-                <p>Which platform?</p>
-                <label><input type="radio" name="beta_platform_b" value="iOS" checked> iOS (iPhone / iPad)</label>
-                <label><input type="radio" name="beta_platform_b" value="Android"> Android</label>
-              </div>
-              <input type="hidden" name="fields[beta_tester]" id="beta-hidden-field-beta" value="Yes">
-              <input type="hidden" name="fields[platform]" id="platform-hidden-field-beta" value="iOS">
-              <input type="hidden" name="ml-submit" value="1">
-              <div class="ml-form-embedSubmit">
-                <button type="submit" class="primary">Notify Me About Future Betas</button>
-              </div>
-              <input type="hidden" name="anticsrf" value="true">
-            </form>
-          </div>
-          <div class="ml-form-successBody row-success" style="display:none">
-            <div class="ml-form-successContent">
-              <h4 id="beta-success-heading">You're on the list!</h4>
-              <p id="beta-success-msg">Thanks — we'll reach out when a future beta opens up.</p>
             </div>
           </div>
         </div>
       </div>
+      <p class="modal-sub">No spam. Just a heads-up when a beta opens.</p>
     </div>
-    <p class="modal-sub">No spam. Just a heads up when a beta opens.</p>
   </div>
 
   <script>
-    // Pre-show platform selector since beta checkbox starts checked
     document.getElementById('platform-selector-beta').style.display = 'block';
 
     document.getElementById('beta-opt-in-beta').addEventListener('change', function() {

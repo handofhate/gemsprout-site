@@ -3,131 +3,199 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Terms of Service — GemSprout</title>
+  <title>Terms of Service | GemSprout</title>
+  <link rel="icon" type="image/png" href="gemsproutpadded.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --purple: #6C63FF;
-      --bg: #F0F4FF;
-      --text: #2D3047;
-      --muted: #6B7280;
-      --border: #E5E7EB;
+      --pine: #1d4d3f;
+      --pine-deep: #16392f;
+      --sprout: #2f7a63;
+      --ink: #20322b;
+      --muted: #607168;
+      --border: rgba(32, 50, 43, 0.1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(216, 178, 91, 0.14), transparent 28%),
+        linear-gradient(180deg, #f6efdf 0%, #fbf8f1 100%);
+      color: var(--ink);
+      line-height: 1.75;
+    }
+    h1, h2, .back-link, .meta, .brand {
+      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    .shell {
+      width: min(820px, calc(100% - 32px));
+      margin: 0 auto;
     }
     header {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      padding: 40px 24px;
-      text-align: center;
-      color: #fff;
-      position: relative;
+      padding: 26px 0 32px;
     }
-    header img { width: 72px; height: 72px; margin-bottom: 12px; }
-    header h1 { font-size: 1.8rem; font-weight: 800; }
-    header p { font-size: 0.95rem; opacity: 0.8; margin-top: 4px; }
     .back-link {
-      position: absolute;
-      top: 16px;
-      left: 20px;
-      color: rgba(255,255,255,0.8);
-      font-size: 0.88rem;
-      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--pine);
       text-decoration: none;
+      font-weight: 700;
+      margin-bottom: 22px;
     }
-    .back-link:hover { color: #fff; }
+    .hero {
+      background: rgba(255, 253, 247, 0.88);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 28px;
+      box-shadow: 0 24px 70px rgba(22, 57, 47, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .hero img {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      box-shadow: 0 16px 30px rgba(29, 77, 63, 0.12);
+    }
+    .brand {
+      color: var(--sprout);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--pine-deep);
+      margin-bottom: 6px;
+    }
+    .hero p {
+      color: var(--muted);
+      margin: 0;
+    }
     main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
+      padding: 16px 0 72px;
+    }
+    .content {
+      background: rgba(255, 253, 247, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 34px 28px 38px;
+      box-shadow: 0 24px 70px rgba(22, 57, 47, 0.06);
+    }
+    .meta {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
     }
     h2 {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
-      color: var(--purple);
-      margin: 32px 0 10px;
+      color: var(--pine);
+      margin: 30px 0 10px;
     }
-    p { margin-bottom: 12px; color: var(--text); }
-    ul { margin: 8px 0 12px 20px; }
-    li { margin-bottom: 6px; }
-    a { color: var(--purple); }
-    .updated {
-      font-size: 0.85rem;
+    p { margin-bottom: 12px; }
+    ul { margin: 8px 0 12px 22px; }
+    li { margin-bottom: 8px; }
+    a { color: var(--pine); }
+    .links {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
       color: var(--muted);
-      margin-bottom: 32px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 24px, 820px); }
+      .hero, .content {
+        border-radius: 24px;
+      }
+      .hero {
+        padding: 22px;
+        align-items: flex-start;
+      }
     }
   </style>
 </head>
 <body>
+  <header class="shell">
+    <a href="/" class="back-link">← Return to GemSprout</a>
+    <div class="hero">
+      <img src="gemsproutpadded.png" alt="GemSprout logo">
+      <div>
+        <div class="brand">GemSprout</div>
+        <h1>Terms of Service</h1>
+        <p>The terms that govern use of the GemSprout app and related services.</p>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <a href="/" class="back-link">← Return to GemSprout</a>
-  <img src="gemsproutpadded.png" alt="GemSprout logo">
-  <h1>Terms of Service</h1>
-  <p>GemSprout — Family Chores &amp; Rewards</p>
-</header>
+  <main class="shell">
+    <div class="content">
+      <p class="meta">Last updated: March 29, 2026</p>
 
-<main>
-  <p class="updated">Last updated: March 29, 2026</p>
+      <p>These Terms of Service ("Terms") govern your use of the GemSprout mobile application ("App") and any related services provided by GemSprout ("we", "our", or "us"). By downloading or using the app, you agree to be bound by these Terms. If you do not agree, do not use the app.</p>
 
-  <p>These Terms of Service ("Terms") govern your use of the GemSprout mobile application ("App") and any related services provided by GemSprout ("we", "our", or "us"). By downloading or using the App, you agree to be bound by these Terms. If you do not agree, do not use the App.</p>
+      <h2>1. Eligibility and Account Responsibility</h2>
+      <p>GemSprout is intended for use by families. The parent or guardian who sets up the family account ("Account Holder") must be at least 18 years of age. By creating a family account, you represent that you are the parent or legal guardian of any children whose information is entered into the app.</p>
+      <p>You are responsible for maintaining the security of your family code and any authentication credentials associated with your account. You are responsible for all activity that occurs under your family account.</p>
 
-  <h2>1. Eligibility and Account Responsibility</h2>
-  <p>GemSprout is intended for use by families. The parent or guardian who sets up the family account ("Account Holder") must be at least 18 years of age. By creating a family account, you represent that you are the parent or legal guardian of any children whose information is entered into the App.</p>
-  <p>You are responsible for maintaining the security of your family code and any authentication credentials associated with your account. You are responsible for all activity that occurs under your family account.</p>
+      <h2>2. Subscription and Billing</h2>
+      <p>GemSprout offers a subscription ("GemSprout Pro") that unlocks premium features. Subscriptions are available on a monthly or annual basis and are billed through your Apple App Store account.</p>
+      <ul>
+        <li>A free trial period may be offered to new subscribers. The trial period and subscription price are displayed at the time of purchase.</li>
+        <li>Subscriptions automatically renew at the end of each billing period unless cancelled at least 24 hours before the renewal date.</li>
+        <li>You can manage or cancel your subscription at any time through your Apple ID account settings.</li>
+        <li>No refunds are issued for partial subscription periods, except as required by applicable law or Apple's refund policies.</li>
+      </ul>
+      <p>All billing is handled by Apple. GemSprout does not have access to your payment information.</p>
 
-  <h2>2. Subscription and Billing</h2>
-  <p>GemSprout offers a subscription ("GemSprout Pro") that unlocks premium features. Subscriptions are available on a monthly or annual basis and are billed through your Apple App Store account.</p>
-  <ul>
-    <li>A free trial period may be offered to new subscribers. The trial period and subscription price are displayed at the time of purchase.</li>
-    <li>Subscriptions automatically renew at the end of each billing period unless cancelled at least 24 hours before the renewal date.</li>
-    <li>You can manage or cancel your subscription at any time through your Apple ID account settings.</li>
-    <li>No refunds are issued for partial subscription periods, except as required by applicable law or Apple's refund policies.</li>
-  </ul>
-  <p>All billing is handled by Apple. GemSprout does not have access to your payment information.</p>
+      <h2>3. Acceptable Use</h2>
+      <p>You agree to use GemSprout only for its intended purpose - managing family chores and rewards. You agree not to:</p>
+      <ul>
+        <li>Use the app for any unlawful purpose or in violation of any applicable law or regulation.</li>
+        <li>Attempt to gain unauthorized access to any other family's data.</li>
+        <li>Reverse engineer, decompile, or modify any part of the app.</li>
+        <li>Use the app to upload or transmit harmful, offensive, or illegal content.</li>
+      </ul>
 
-  <h2>3. Acceptable Use</h2>
-  <p>You agree to use GemSprout only for its intended purpose — managing family chores and rewards. You agree not to:</p>
-  <ul>
-    <li>Use the App for any unlawful purpose or in violation of any applicable law or regulation.</li>
-    <li>Attempt to gain unauthorized access to any other family's data.</li>
-    <li>Reverse engineer, decompile, or modify any part of the App.</li>
-    <li>Use the App to upload or transmit any harmful, offensive, or illegal content.</li>
-  </ul>
+      <h2>4. Children's Data</h2>
+      <p>GemSprout is designed for family use and may be used by children under the supervision of a parent or guardian. As the Account Holder, you are responsible for all content entered on behalf of children in your family. We do not knowingly collect personal information directly from children. All children's data, including names, avatars, and chore history, is entered by and remains under the control of the parent or guardian.</p>
+      <p>Please review our <a href="/privacy.html">Privacy Policy</a> for full details on how we handle children's data and our compliance with the Children's Online Privacy Protection Act (COPPA).</p>
 
-  <h2>4. Children's Data</h2>
-  <p>GemSprout is designed for family use and may be used by children under the supervision of a parent or guardian. As the Account Holder, you are responsible for all content entered on behalf of children in your family. We do not knowingly collect personal information directly from children. All children's data (names, avatars, chore history) is entered by and remains under the control of the parent or guardian.</p>
-  <p>Please review our <a href="privacy.html">Privacy Policy</a> for full details on how we handle children's data and our compliance with the Children's Online Privacy Protection Act (COPPA).</p>
+      <h2>5. Data and Privacy</h2>
+      <p>Your use of GemSprout is also governed by our <a href="/privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the app, you consent to the collection and use of information as described in the Privacy Policy.</p>
+      <p>You retain ownership of all data you enter into the app. You may delete your family's data at any time from within the app (Settings -> Reset All Data).</p>
 
-  <h2>5. Data and Privacy</h2>
-  <p>Your use of GemSprout is also governed by our <a href="privacy.html">Privacy Policy</a>, which is incorporated into these Terms by reference. By using the App, you consent to the collection and use of information as described in the Privacy Policy.</p>
-  <p>You retain ownership of all data you enter into the App. You may delete your family's data at any time from within the App (Settings → Reset All Data).</p>
+      <h2>6. Intellectual Property</h2>
+      <p>The GemSprout application, including its design, graphics, and underlying code, is owned by GemSprout and protected by applicable intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the app for personal, non-commercial family use.</p>
 
-  <h2>6. Intellectual Property</h2>
-  <p>The GemSprout application, including its design, graphics, and underlying code, is owned by GemSprout and protected by applicable intellectual property laws. You are granted a limited, non-exclusive, non-transferable license to use the App for personal, non-commercial family use.</p>
+      <h2>7. Disclaimers and Limitation of Liability</h2>
+      <p>GemSprout is provided "as is" without warranties of any kind, either express or implied. We do not guarantee that the app will be error-free, uninterrupted, or free from security vulnerabilities.</p>
+      <p>To the fullest extent permitted by law, GemSprout shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of, or inability to use, the app, including but not limited to loss of data.</p>
 
-  <h2>7. Disclaimers and Limitation of Liability</h2>
-  <p>GemSprout is provided "as is" without warranties of any kind, either express or implied. We do not guarantee that the App will be error-free, uninterrupted, or free from security vulnerabilities.</p>
-  <p>To the fullest extent permitted by law, GemSprout shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of, or inability to use, the App — including but not limited to loss of data.</p>
+      <h2>8. Termination</h2>
+      <p>We reserve the right to suspend or terminate access to the app for any user who violates these Terms. You may stop using the app at any time. Upon termination, your right to use the app ceases, though any data you have stored may be deleted as described in our Privacy Policy.</p>
 
-  <h2>8. Termination</h2>
-  <p>We reserve the right to suspend or terminate access to the App for any user who violates these Terms. You may stop using the App at any time. Upon termination, your right to use the App ceases, though any data you have stored may be deleted as described in our Privacy Policy.</p>
+      <h2>9. Changes to These Terms</h2>
+      <p>We may update these Terms from time to time. Changes will be posted here with an updated date. Your continued use of the app after changes are posted constitutes acceptance of the revised Terms.</p>
 
-  <h2>9. Changes to These Terms</h2>
-  <p>We may update these Terms from time to time. Changes will be posted here with an updated date. Your continued use of the App after changes are posted constitutes acceptance of the revised Terms.</p>
+      <h2>10. Governing Law</h2>
+      <p>These Terms are governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising under these Terms shall be resolved in the applicable courts of the United States.</p>
 
-  <h2>10. Governing Law</h2>
-  <p>These Terms are governed by and construed in accordance with the laws of the United States, without regard to conflict of law principles. Any disputes arising under these Terms shall be resolved in the applicable courts of the United States.</p>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about these Terms, please contact us at <a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a>.</p>
 
-  <h2>Contact Us</h2>
-  <p>If you have any questions about these Terms, please contact us at:</p>
-  <p><a href="mailto:contact@gemsprout.com">contact@gemsprout.com</a></p>
-</main>
-
+      <div class="links">See also: <a href="/privacy.html">Privacy Policy</a> and <a href="/support.html">Support</a>.</div>
+    </div>
+  </main>
 </body>
 </html>
