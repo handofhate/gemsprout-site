@@ -13,7 +13,6 @@
       --pine: #1d4d3f;
       --pine-deep: #16392f;
       --sprout: #2f7a63;
-      --cream: #f7f1e5;
       --gold: #d8b25b;
       --ink: #20322b;
       --muted: #607168;
@@ -33,7 +32,7 @@
       align-items: center;
       justify-content: center;
     }
-    h1, .status, .back-link {
+    h1, .status, .back-link, .cta-link, .section-title {
       font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
     }
     .wrap {
@@ -50,7 +49,7 @@
     }
     .back-link:hover { color: var(--pine-deep); }
     .card {
-      background: rgba(255, 253, 247, 0.88);
+      background: rgba(255, 253, 247, 0.9);
       border: 1px solid var(--border);
       border-radius: 30px;
       padding: 36px 30px 30px;
@@ -101,7 +100,7 @@
       line-height: 1.65;
       margin-bottom: 18px;
     }
-    .app-store-link {
+    .cta-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -111,7 +110,6 @@
       background: linear-gradient(135deg, var(--sprout), var(--pine));
       color: #fff;
       text-decoration: none;
-      font-family: "Jost", sans-serif;
       font-weight: 700;
       box-shadow: 0 16px 34px rgba(29, 77, 63, 0.2);
       margin-bottom: 24px;
@@ -122,7 +120,6 @@
       margin: 0 0 24px;
     }
     .section-title {
-      font-family: "Jost", sans-serif;
       font-size: 0.98rem;
       font-weight: 700;
       color: var(--pine-deep);
@@ -258,11 +255,11 @@
     <div class="card">
       <img src="https://gemsprout.com/gemsproutpadded.png" alt="GemSprout">
       <h1>GemSprout Beta</h1>
-      <span class="status">Beta Testing Closed</span>
-      <p class="lead">Beta testing is not currently open. GemSprout is available on the App Store now, and you can still sign up below if you want to hear about future beta builds or new platform availability.</p>
-      <a href="https://apps.apple.com/app/gemsprout/id6743078049" class="app-store-link">Download on the App Store</a>
+      <span class="status">Coming Soon</span>
+      <p class="lead">GemSprout is not publicly available yet. Sign up below if you want launch updates, future beta access, and a heads-up when the app is ready.</p>
+      <a href="#mlb2-38567556" class="cta-link">Sign Up for Updates</a>
       <div class="divider"></div>
-      <div class="section-title">Join the future beta list</div>
+      <div class="section-title">Join the beta and launch list</div>
       <div id="mlb2-38567556" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-38567556">
         <div class="ml-form-align-center">
           <div class="ml-form-embedWrapper embedForm">
@@ -291,7 +288,7 @@
                 <input type="hidden" name="fields[platform]" id="platform-hidden-field-beta" value="iOS">
                 <input type="hidden" name="ml-submit" value="1">
                 <div class="ml-form-embedSubmit">
-                  <button type="submit" class="primary">Notify Me About Future Betas</button>
+                  <button type="submit" class="primary">Notify Me About GemSprout</button>
                 </div>
                 <input type="hidden" name="anticsrf" value="true">
               </form>
@@ -299,13 +296,13 @@
             <div class="ml-form-successBody row-success" style="display:none">
               <div class="ml-form-successContent">
                 <h4 id="beta-success-heading">You're on the list!</h4>
-                <p id="beta-success-msg">Thanks - we'll reach out when a future beta opens up.</p>
+                <p id="beta-success-msg">Thanks - we'll reach out when GemSprout is getting close.</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <p class="modal-sub">No spam. Just a heads-up when a beta opens.</p>
+      <p class="modal-sub">No spam. Just launch updates and occasional beta news.</p>
     </div>
   </div>
 
