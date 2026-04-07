@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GemSprout | Gentle motivation for family rhythms, rewards, and savings</title>
   <meta name="description" content="GemSprout helps families build steadier rhythms with rewards, savings, celebrations, and a kid experience that feels warm, calm, and motivating.">
+  <link rel="icon" type="image/svg+xml" href="brand/gemsprout.svg">
   <link rel="icon" type="image/png" href="brand/gemsproutcoloricon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -242,7 +243,14 @@
       position: relative;
       z-index: 1;
       display: grid;
+      justify-items: center;
       gap: 18px;
+    }
+
+    .hero-character {
+      width: min(100%, 280px);
+      height: auto;
+      filter: drop-shadow(0 22px 34px rgba(29, 77, 63, 0.18));
     }
 
     .hero-mark-chip {
@@ -267,60 +275,11 @@
       object-fit: contain;
     }
 
-    .hero-brand-block {
-      display: grid;
-      gap: 12px;
-      justify-items: start;
-    }
-
-    .hero-brand-block h2 {
-      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      font-size: clamp(1.7rem, 3vw, 2.4rem);
-      line-height: 0.96;
-      letter-spacing: -0.04em;
-      color: var(--pine-deep);
-      max-width: 8ch;
-    }
-
-    .hero-brand-block p {
-      color: var(--muted);
-      max-width: 34ch;
-      font-size: 0.98rem;
-    }
-
     .hero-pills {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
       justify-content: flex-start;
-    }
-
-    .hero-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .hero-metric {
-      padding: 16px 14px;
-      border-radius: 20px;
-      background: rgba(255, 255, 255, 0.74);
-      border: 1px solid rgba(29, 77, 63, 0.08);
-      box-shadow: 0 12px 24px rgba(29, 77, 63, 0.07);
-    }
-
-    .hero-metric strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--pine-deep);
-      font-family: "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-
-    .hero-metric span {
-      color: var(--muted);
-      font-size: 0.88rem;
     }
 
     .pill {
@@ -887,10 +846,6 @@
         flex-direction: column;
       }
 
-      .hero-metrics {
-        grid-template-columns: 1fr;
-      }
-
       .pill {
         width: 100%;
         justify-content: center;
@@ -959,7 +914,7 @@
   <nav>
     <div class="nav-inner">
       <a href="/" class="nav-logo">
-        <img src="brand/gemsproutmono.png" alt="GemSprout">
+        <img src="brand/gemsprout.svg" alt="GemSprout">
         GemSprout
       </a>
       <div class="nav-links">
@@ -984,32 +939,15 @@
         </div>
         <div class="hero-panel">
           <div class="hero-art">
+            <img src="brand/gemsprout.svg" alt="GemSprout logo" class="hero-character">
             <div class="hero-mark-chip">
-              <img src="brand/gemsproutmono.png" alt="">
+              <img src="brand/gemsprout.svg" alt="">
               Calm family growth
-            </div>
-            <div class="hero-brand-block">
-              <h2>Designed for real family life.</h2>
-              <p>GemSprout gives routines, rewards, savings, and shared progress one calm visual system instead of a noisy chore chart.</p>
             </div>
             <div class="hero-pills">
               <span class="pill"><i class="fa-solid fa-seedling"></i> Family rhythms</span>
               <span class="pill money"><i class="fa-solid fa-piggy-bank"></i> Savings goals</span>
               <span class="pill family"><i class="fa-solid fa-people-group"></i> Shared wins</span>
-            </div>
-            <div class="hero-metrics">
-              <div class="hero-metric">
-                <strong>Kid-first</strong>
-                <span>Clear, gentle daily flow</span>
-              </div>
-              <div class="hero-metric">
-                <strong>Parent control</strong>
-                <span>Approvals, savings, and rewards</span>
-              </div>
-              <div class="hero-metric">
-                <strong>Shared progress</strong>
-                <span>Celebrations and weekly recaps</span>
-              </div>
             </div>
             <div class="hero-note">
               <strong>Designed for real homes, not idealized ones.</strong>
@@ -1147,7 +1085,7 @@
     <section class="section">
       <div class="shell">
         <div class="cta-panel">
-          <img src="brand/gemsproutcoloricon.png" alt="GemSprout icon" class="cta-mark">
+          <img src="brand/gemsprout.svg" alt="GemSprout icon" class="cta-mark">
           <h2>Want first access when GemSprout launches?</h2>
           <p>GemSprout is coming soon. Join the beta and launch list if you want updates, early access news, and a heads-up when it is ready.</p>
           <div class="cta-actions">
@@ -1167,7 +1105,7 @@
   <footer>
     <div class="shell">
       <div class="footer-brand">
-        <img src="brand/gemsproutmonoicon.png" alt="GemSprout brand mark">
+        <img src="brand/gemsprout.svg" alt="GemSprout brand mark">
         <span>GemSprout</span>
       </div>
       <div class="social-links">
